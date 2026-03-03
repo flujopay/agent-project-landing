@@ -6,27 +6,24 @@ import { useState } from "react";
 
 const faqs = [
   {
-    question: "¿Cuánto toma ver resultados?",
-    answer: "Primeros contactos en 48-72h. Acuerdos típicamente en 2 semanas.",
-  },
-  {
-    question: "¿Qué pasa si no recuperan nada?",
-    answer: "No pagas nada. Modelo 100% contingente.",
-  },
-  {
-    question: "¿Se preservan las relaciones?",
+    question: "¿Van a dañar mis relaciones con clientes?",
     answer:
-      "Nuestro enfoque profesional preserva vínculos comerciales. 40 años de experiencia Recsa.",
+      "Todo lo contrario. 40 años nos enseñaron que preservar relaciones genera más valor.",
   },
   {
-    question: "¿Trabajan solo cartera vencida?",
+    question: "¿Cuánto tarda en ver resultados?",
     answer:
-      "Sí, cartera +60 días vencida. Para cobranza preventiva, usa la plataforma Sena.",
+      "Primeros acuerdos típicamente en 2-3 semanas.",
   },
   {
-    question: "¿En qué países operan?",
+    question: "¿Se integra con mis sistemas?",
     answer:
-      "15 países LATAM: Chile, Perú, Colombia, México, Argentina, Brasil, y más.",
+      "Sí. APIs para los ERPs más usados. O trabajamos con archivos.",
+  },
+  {
+    question: "¿Cuánto cuesta?",
+    answer:
+      "Depende de tu volumen y necesidades. El diagnóstico inicial es gratis.",
   },
 ];
 
@@ -34,13 +31,8 @@ export const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div id="preguntas-frecuentes" className="bg-white py-12 md:py-20">
+    <section id="preguntas-frecuentes" className="bg-[#F9F9F9] py-16 md:py-24">
       <div className="max-w-[1280px] mx-auto px-4 md:px-12">
-        <div className="text-left mb-12">
-          <h2 className="text-brand-primary-dark text-3xl md:text-4xl font-extrabold mb-4">
-            Preguntas <span className="text-brand-primary">frecuentes</span>
-          </h2>
-        </div>
 
         <div className="max-w-3xl mx-auto flex flex-col gap-4">
           {faqs.map((faq, index) => (
@@ -76,6 +68,6 @@ export const FAQ = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };

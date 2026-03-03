@@ -1,16 +1,15 @@
 import {
   Award,
-  DollarSign,
   Globe,
   PhoneCall,
-  TrendingUp,
   Zap,
+  Building2,
 } from "lucide-react";
 
 const stats = [
   {
     value: "146M",
-    label: "gestiones mensuales",
+    label: "gestiones/mes",
     icon: Zap,
   },
   {
@@ -20,70 +19,61 @@ const stats = [
   },
   {
     value: "15",
-    label: "países en LATAM",
+    label: "países LATAM",
     icon: Globe,
   },
   {
-    value: "40+",
-    label: "años de experiencia",
-    icon: Award,
+    value: "+500",
+    label: "empresas confían",
+    icon: Building2,
   },
-  // {
-  //   value: "$XXM",
-  //   label: "recuperados mensualmente",
-  //   icon: DollarSign,
-  // },
-  // {
-  //   value: "XX%",
-  //   label: "tasa promedio de recuperación",
-  //   icon: TrendingUp,
-  // },
 ];
 
 export const Credibility = () => {
   return (
-    <div id="credibilidad" className="bg-[#F9F9F9] py-12 md:py-20">
+    <section id="credibilidad" className="bg-white py-16 md:py-24">
       <div className="max-w-[1280px] mx-auto px-4 md:px-12">
-        <div className="text-left mb-12">
-          <h2 className="text-brand-primary-dark text-3xl md:text-4xl font-extrabold mb-4">
-            Respaldados por el líder en{" "}
-            <span className="text-brand-primary">cobranza LATAM</span>
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="font-canaro font-extrabold text-3xl md:text-4xl lg:text-5xl text-brand-primary-dark mb-4">
+            40 años respaldan cada decisión
           </h2>
-          <p className="font-adobe text-black mt-2 text-lg leading-5">
-            Recsa lleva más de 40 años recuperando cartera compleja para
-            empresas de todos los tamaños
+          <p className="font-adobe text-slate-600 text-lg md:text-xl max-w-2xl mx-auto">
+            Sena nace de Recsa, referente en gestión de cartera en Latinoamérica.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
               <div
                 key={index}
-                className="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-all group"
+                className="bg-[#F9F9F9] rounded-2xl p-6 md:p-8 text-center hover:shadow-md transition-all group"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-primary/10 rounded-xl mb-4 group-hover:bg-brand-primary/20 transition-colors">
-                  <Icon className="h-8 w-8 text-brand-primary" />
+                <div className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-brand-secondary/10 rounded-xl mb-4 group-hover:bg-brand-secondary/20 transition-colors">
+                  <Icon className="h-6 w-6 md:h-7 md:w-7 text-brand-secondary" />
                 </div>
-                <div className="text-4xl md:text-5xl font-extrabold text-brand-primary-dark mb-2">
+                <div className="text-2xl md:text-4xl font-extrabold text-brand-primary-dark mb-1">
                   {stat.value}
                 </div>
-                <div className="text-slate-600 text-sm">{stat.label}</div>
+                <div className="text-slate-600 text-xs md:text-sm">{stat.label}</div>
               </div>
             );
           })}
         </div>
 
-        <div className="mt-12 text-center">
-          <div className="inline-flex items-center gap-2 bg-white rounded-full px-6 py-3 shadow-sm">
-            <Award className="h-5 w-5 text-brand-primary" />
-            <span className="text-brand-primary-dark font-semibold">
+        {/* Powered by Recsa Badge */}
+        <div className="text-center">
+          <div className="inline-flex items-center gap-3 bg-brand-primary-dark rounded-full px-6 py-3 shadow-lg">
+            <Award className="h-5 w-5 text-brand-secondary" />
+            <span className="text-white font-adobe font-semibold">
               Powered by Recsa
             </span>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

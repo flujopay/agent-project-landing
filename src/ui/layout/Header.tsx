@@ -525,6 +525,16 @@ export const Header = ({ variant }: Props) => {
   // =========================
   const [openIndustries, setOpenIndustries] = useState(false);
   const [openProducts, setOpenProducts] = useState(false);
+  const [showStickyCTA, setShowStickyCTA] = useState(false);
+
+  // Show CTA button after scrolling past Hero (~400px)
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowStickyCTA(window.scrollY > 400);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const closeTimerIndustries = useRef<number | null>(null);
   const closeTimerProducts = useRef<number | null>(null);
@@ -923,26 +933,40 @@ export const Header = ({ variant }: Props) => {
             onClick={redirectLogin}
             className="text-md"
           />
-          <Button
-            size="md"
-            text="Contáctanos"
-            variant={
-              variant === "primary" ? "primaryFilled" : "secondaryFilled"
-            }
-            className="text-md"
-            onClick={handleContactClick}
-          />
+          <div
+            className={`transition-all duration-300 ${
+              showStickyCTA
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-4 pointer-events-none"
+            }`}
+          >
+            <Button
+              size="md"
+              text="Agendar diagnóstico"
+              variant="secondaryFilled"
+              className="text-md"
+              onClick={handleContactClick}
+            />
+          </div>
         </div>
 
         {/* Mobile */}
         <div className="lg:hidden flex items-center gap-2">
-          <Button
-            size="sm"
-            text="Contáctanos"
-            variant="secondaryFilled"
-            className="text-xs px-3 py-1.5"
-            onClick={handleContactClick}
-          />
+          <div
+            className={`transition-all duration-300 ${
+              showStickyCTA
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-4 pointer-events-none"
+            }`}
+          >
+            <Button
+              size="sm"
+              text="Agendar"
+              variant="secondaryFilled"
+              className="text-xs px-3 py-1.5"
+              onClick={handleContactClick}
+            />
+          </div>
           <button
             onClick={openMobileMenu}
             className="p-2 z-50"
