@@ -6,6 +6,11 @@ import { useState } from "react";
 
 const faqs = [
   {
+    question: "¿Por qué Sena y no otra solución?",
+    answer:
+      "No somos solo software. Somos tecnología + operación + estrategia. Entendemos tu industria, diseñamos tu proyecto completo y ejecutamos. Tú vendes, nosotros cobramos.",
+  },
+  {
     question: "¿Van a dañar mis relaciones con clientes?",
     answer:
       "Todo lo contrario. 40 años nos enseñaron que preservar relaciones genera más valor.",
@@ -23,7 +28,7 @@ const faqs = [
   {
     question: "¿Cuánto cuesta?",
     answer:
-      "Depende de tu volumen y necesidades. El diagnóstico inicial es gratis.",
+      "Planes desde $39 USD/mes para la plataforma. Si necesitas equipo de cobranza, trabajamos con comisión por éxito, sin riesgo para ti. El diagnóstico inicial es gratis.",
   },
 ];
 

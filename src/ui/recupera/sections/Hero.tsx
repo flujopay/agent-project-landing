@@ -30,8 +30,13 @@ export const Hero = () => {
             Deja de perseguir pagos
           </h1>
 
-          <p className="text-slate-700 text-sm md:text-lg lg:text-xl mb-6 md:mb-8 mt-3 md:mt-4 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-slate-700 text-sm md:text-lg lg:text-xl mt-3 md:mt-4 max-w-3xl mx-auto leading-relaxed">
             Analizamos tu cartera. Diseñamos la estrategia. Ejecutamos. Tus clientes pagan.
+          </p>
+
+          {/* Diferenciador */}
+          <p className="text-brand-primary font-semibold text-base md:text-xl mt-4 mb-6 md:mb-8">
+            No es solo software. Es tu operación de cobranza completa.
           </p>
 
           {/* CTA único con urgencia */}
@@ -88,6 +93,7 @@ export const Hero = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };

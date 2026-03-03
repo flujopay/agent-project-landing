@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 
-// Placeholder para logos de clientes - reemplazar con logos reales
 const clientLogos = [
-  { name: "Cliente 1", src: "/logos/client-1.png" },
-  { name: "Cliente 2", src: "/logos/client-2.png" },
-  { name: "Cliente 3", src: "/logos/client-3.png" },
-  { name: "Cliente 4", src: "/logos/client-4.png" },
-  { name: "Cliente 5", src: "/logos/client-5.png" },
+  { name: "Científica Andina", src: "https://somossena.com/_next/static/media/cientifica_logo.1b3f19e5.png" },
+  { name: "Proweld", src: "https://somossena.com/_next/static/media/proweld_logo.2df9f015.png" },
+  { name: "Aquarius Consulting", src: "https://somossena.com/_next/static/media/aquarius_consulting_logo.b34fbc2a.png" },
+  { name: "Top Space", src: "https://somossena.com/_next/static/media/top_space_logo.145e55c9.png" },
+  { name: "Maruz", src: "https://somossena.com/_next/static/media/maruz_logo.b330e9ab.png" },
+  { name: "AOM", src: "https://somossena.com/_next/static/media/aom_logo.699160f3.png" },
 ];
 
 export const SocialProof = () => {
@@ -25,19 +25,14 @@ export const SocialProof = () => {
                 key={index}
                 className="h-8 md:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
               >
-                {/* Placeholder mientras no hay logos reales */}
-                <div className="h-full w-24 md:w-32 bg-slate-200 rounded flex items-center justify-center text-slate-400 text-xs">
-                  {logo.name}
-                </div>
-                {/* Descomentar cuando haya logos reales:
                 <Image
                   src={logo.src}
                   alt={logo.name}
                   width={120}
                   height={40}
                   className="h-full w-auto object-contain"
+                  unoptimized
                 />
-                */}
               </div>
             ))}
           </div>

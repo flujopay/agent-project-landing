@@ -11,6 +11,7 @@ import { FAQ } from "./sections/FAQ";
 import { FinalCTA } from "./sections/FinalCTA";
 import { Hero } from "./sections/Hero";
 import { SocialProof } from "./sections/SocialProof";
+import { Transformacion } from "./sections/Transformacion";
 
 export const RecuperaPage = () => {
   const searchParams = useSearchParams();
@@ -40,6 +41,7 @@ export const RecuperaPage = () => {
       <div className="grow">
         <Hero />
         <SocialProof />
+        <Transformacion />
         <ComoTrabajamos />
         <Credibility />
         <FAQ />
