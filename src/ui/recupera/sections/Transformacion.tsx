@@ -11,10 +11,10 @@ const otroSoftware = [
 ];
 
 const conSena = [
-  "Tecnología que se adapta a tu operación",
-  "Entendemos tu negocio antes de escribir código",
-  "Equipo dedicado que conoce tus procesos",
-  "Solo pagas por lo que realmente necesitas",
+  "Plataforma que se adapta a tu operación",
+  "Implementación con estrategia, no improvisada",
+  "Configuramos según tus flujos reales",
+  "Solo activas lo que realmente necesitas",
 ];
 
 export const Transformacion = () => {
