@@ -61,9 +61,9 @@ export const Hero = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-canaro text-brand-primary-dark text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] mb-6"
           >
-            Nos metemos en tu empresa.
+            Cobranza inteligente
             <br />
-            <span className="text-brand-secondary">No tú en nuestro software.</span>
+            <span className="text-brand-secondary">que se adapta a tu operación.</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -73,7 +73,7 @@ export const Hero = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-slate-600 text-lg md:text-xl lg:text-2xl leading-relaxed mb-10 max-w-2xl mx-auto"
           >
-            Entendemos tus procesos, nos integramos a tu operación y diseñamos una solución a tu medida. Tú sigues vendiendo, nosotros nos encargamos de cobrar.
+            Una plataforma que se configura según tus flujos reales. Tú sigues vendiendo, nosotros nos encargamos de cobrar.
           </motion.p>
 
           {/* CTAs */}
