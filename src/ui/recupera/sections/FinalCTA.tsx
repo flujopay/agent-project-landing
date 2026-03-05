@@ -13,7 +13,8 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Shield, Clock, Lock, Check } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 type FormData = {
   nombre: string;
@@ -177,46 +178,91 @@ export const FinalCTA = () => {
   };
 
   return (
-    <section id="contacto" className="py-16 md:py-24 bg-brand-primary-dark">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-12">
+    <section id="contacto" className="py-16 md:py-24 bg-gradient-to-br from-brand-primary-dark via-brand-primary-dark to-[#2a3f6e] relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-secondary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 -left-20 w-72 h-72 bg-brand-primary/20 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left: Copy */}
-          <div>
-            <h2 className="font-canaro font-extrabold text-3xl md:text-4xl lg:text-5xl text-white mb-4">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
+              <span className="w-2 h-2 bg-brand-secondary rounded-full animate-pulse" />
+              <span className="text-white/90 font-medium text-sm">
+                Diagnóstico gratuito
+              </span>
+            </span>
+
+            <h2 className="font-canaro font-extrabold text-3xl md:text-4xl lg:text-5xl text-white mb-4 leading-tight">
               Tu operación financiera puede ser otra
             </h2>
-            <p className="font-adobe text-slate-300 text-lg md:text-xl mb-8">
-              Agenda tu diagnóstico gratuito. Sin compromiso.
+            <p className="text-slate-300 text-lg md:text-xl mb-8">
+              Agenda tu diagnóstico gratuito. Sin compromiso. Respuesta en 24h.
             </p>
 
-            <div className="flex flex-col gap-3 mb-8">
-              <div className="flex items-center gap-3">
-                <Check className="h-5 w-5 text-brand-secondary" />
-                <span className="text-white">Respuesta en 24h</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3">
+                <div className="w-8 h-8 bg-brand-secondary/20 rounded-lg flex items-center justify-center">
+                  <Check className="h-4 w-4 text-brand-secondary" />
+                </div>
+                <span className="text-white text-sm">Respuesta en 24h</span>
               </div>
-              <div className="flex items-center gap-3">
-                <Check className="h-5 w-5 text-brand-secondary" />
-                <span className="text-white">Sin compromiso</span>
+              <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3">
+                <div className="w-8 h-8 bg-brand-secondary/20 rounded-lg flex items-center justify-center">
+                  <Check className="h-4 w-4 text-brand-secondary" />
+                </div>
+                <span className="text-white text-sm">Sin compromiso</span>
               </div>
-              <div className="flex items-center gap-3">
-                <Check className="h-5 w-5 text-brand-secondary" />
-                <span className="text-white">Datos protegidos</span>
+              <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3">
+                <div className="w-8 h-8 bg-brand-secondary/20 rounded-lg flex items-center justify-center">
+                  <Check className="h-4 w-4 text-brand-secondary" />
+                </div>
+                <span className="text-white text-sm">Datos protegidos</span>
+              </div>
+              <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3">
+                <div className="w-8 h-8 bg-brand-secondary/20 rounded-lg flex items-center justify-center">
+                  <Check className="h-4 w-4 text-brand-secondary" />
+                </div>
+                <span className="text-white text-sm">Desde $39 USD/mes</span>
               </div>
             </div>
 
-            <div className="inline-block bg-brand-secondary/20 rounded-full px-4 py-2">
+            <div className="inline-flex items-center gap-2 bg-brand-secondary/20 border border-brand-secondary/30 rounded-full px-4 py-2">
+              <span className="w-2 h-2 bg-brand-secondary rounded-full" />
               <span className="text-brand-secondary font-semibold text-sm">
                 Cupos limitados para diagnósticos este mes
               </span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right: Form */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="bg-white rounded-2xl p-6 md:p-8"
+              className="bg-white rounded-2xl p-6 md:p-8 shadow-2xl"
             >
+              <div className="text-center mb-6">
+                <h3 className="font-canaro font-bold text-xl text-brand-primary-dark mb-1">
+                  Agenda tu diagnóstico
+                </h3>
+                <p className="text-slate-500 text-sm">
+                  Completa el formulario y te contactamos
+                </p>
+              </div>
+
               <div className="space-y-4">
                 <Controller
                   name="nombre"
@@ -316,15 +362,16 @@ export const FinalCTA = () => {
               <Button
                 type="submit"
                 text={
-                  isLoadingPostContactForm ? "Enviando..." : "Agendar diagnóstico"
+                  isLoadingPostContactForm ? "Enviando..." : "Agendar diagnóstico gratis"
                 }
                 variant="secondaryFilled"
                 size="lg"
                 className="w-full"
                 disabled={isLoadingPostContactForm}
+                rightIcon={!isLoadingPostContactForm ? <ArrowRight className="h-5 w-5" /> : undefined}
               />
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
