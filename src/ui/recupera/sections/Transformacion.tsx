@@ -3,18 +3,18 @@
 import { X, Check } from "lucide-react";
 import { motion } from "framer-motion";
 
-const sinSena = [
-  "Persigues pagos manualmente",
-  "Tu equipo pierde tiempo cobrando",
-  "Sin visibilidad de tu cartera",
-  "Clientes molestos por llamadas genéricas",
+const otroSoftware = [
+  "Tú te adaptas a su plataforma rígida",
+  "Implementación genérica, igual para todos",
+  "Soporte por tickets, sin conocer tu negocio",
+  "Pagas por funciones que no usas",
 ];
 
 const conSena = [
-  "Tus clientes pagan a tiempo",
-  "Tu equipo se enfoca en vender",
-  "Dashboard en tiempo real",
-  "Cobranza personalizada que cuida relaciones",
+  "Tecnología que se adapta a tu operación",
+  "Entendemos tu negocio antes de escribir código",
+  "Equipo dedicado que conoce tus procesos",
+  "Solo pagas por lo que realmente necesitas",
 ];
 
 export const Transformacion = () => {
@@ -29,10 +29,10 @@ export const Transformacion = () => {
           className="text-center mb-14 md:mb-20"
         >
           <h2 className="font-canaro font-extrabold text-3xl md:text-4xl lg:text-5xl text-brand-primary-dark mb-4">
-            La diferencia es clara
+            No somos un SaaS más
           </h2>
           <p className="text-slate-500 text-lg max-w-xl mx-auto">
-            Compara tu situación actual con lo que podrías lograr
+            Somos tecnología que se adapta a tu forma de trabajar
           </p>
         </motion.div>
 
@@ -50,11 +50,11 @@ export const Transformacion = () => {
                 <X className="h-6 w-6 text-red-400" />
               </div>
               <h3 className="font-canaro font-bold text-2xl text-slate-700">
-                Sin Sena
+                SaaS tradicional
               </h3>
             </div>
             <ul className="space-y-5">
-              {sinSena.map((item, index) => (
+              {otroSoftware.map((item, index) => (
                 <motion.li
                   key={index}
                   initial={{ opacity: 0, x: -10 }}
