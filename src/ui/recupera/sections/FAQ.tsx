@@ -37,28 +37,25 @@ export const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="preguntas-frecuentes" className="bg-slate-50 py-16 md:py-24">
+    <section id="preguntas-frecuentes" className="bg-slate-50/50 py-20 md:py-28">
       <div className="max-w-[1280px] mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left: Header */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:sticky lg:top-24 lg:self-start"
+            className="lg:sticky lg:top-28 lg:self-start"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary font-semibold text-sm mb-4">
-              FAQ
-            </span>
             <h2 className="font-canaro font-extrabold text-3xl md:text-4xl lg:text-5xl text-brand-primary-dark mb-4">
               Preguntas frecuentes
             </h2>
-            <p className="text-slate-600 text-lg mb-6">
+            <p className="text-slate-500 text-lg mb-8">
               Todo lo que necesitas saber antes de empezar
             </p>
             <div className="hidden lg:block">
-              <p className="text-slate-500 text-sm mb-3">¿Tienes otra pregunta?</p>
+              <p className="text-slate-400 text-sm mb-4">¿Tienes otra pregunta?</p>
               <button
                 onClick={() => {
                   const element = document.getElementById("contacto");
@@ -88,26 +85,26 @@ export const FAQ = () => {
               <DropDownCard
                 key={index}
                 isOpen={openIndex === index}
-                customClassName="bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                customClassName="bg-white border border-slate-200 rounded-2xl"
                 contentHead={
                   <button
                     onClick={() =>
                       setOpenIndex(openIndex === index ? null : index)
                     }
-                    className="w-full px-5 py-5 flex items-center justify-between text-left"
+                    className="w-full px-6 py-5 flex items-center justify-between text-left"
                   >
                     <span className="text-brand-primary-dark font-bold text-base md:text-lg pr-4">
                       {faq.question}
                     </span>
                     <ChevronDown
-                      className={`h-5 w-5 text-brand-primary transition-transform duration-300 shrink-0 ${
+                      className={`h-5 w-5 text-slate-400 transition-transform duration-300 shrink-0 ${
                         openIndex === index ? "rotate-180" : ""
                       }`}
                     />
                   </button>
                 }
                 contentDetail={
-                  <div className="px-5 pb-5 pt-0">
+                  <div className="px-6 pb-6 pt-0">
                     <p className="text-slate-600 text-base leading-relaxed">
                       {faq.answer}
                     </p>

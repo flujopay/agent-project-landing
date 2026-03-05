@@ -17,51 +17,54 @@ const allLogos = [...clientLogos, ...clientLogos];
 
 export const SocialProof = () => {
   return (
-    <section className="py-6 md:py-8 bg-white overflow-hidden">
+    <section className="py-10 md:py-14 bg-slate-50/50 overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-4 md:px-12">
-        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
-          <span className="text-slate-500 text-sm font-semibold whitespace-nowrap uppercase tracking-wider">
-            Confían en nosotros
-          </span>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-center text-slate-400 text-sm font-medium uppercase tracking-wider mb-8"
+        >
+          Empresas que confían en nosotros
+        </motion.p>
 
-          {/* Marquee container */}
-          <div className="relative flex-1 w-full overflow-hidden">
-            {/* Gradient overlays */}
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
+        {/* Marquee container */}
+        <div className="relative w-full overflow-hidden">
+          {/* Gradient overlays */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-50/50 to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-50/50 to-transparent z-10" />
 
-            {/* Scrolling logos */}
-            <motion.div
-              className="flex items-center gap-12"
-              animate={{
-                x: [0, -50 * clientLogos.length],
-              }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  duration: 20,
-                  ease: "linear",
-                },
-              }}
-            >
-              {allLogos.map((logo, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 h-10 w-auto grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all"
-                >
-                  <Image
-                    src={logo.src}
-                    alt={logo.name}
-                    width={120}
-                    height={40}
-                    className="h-full w-auto object-contain"
-                    unoptimized
-                  />
-                </div>
-              ))}
-            </motion.div>
-          </div>
+          {/* Scrolling logos */}
+          <motion.div
+            className="flex items-center gap-16"
+            animate={{
+              x: [0, -80 * clientLogos.length],
+            }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 25,
+                ease: "linear",
+              },
+            }}
+          >
+            {allLogos.map((logo, index) => (
+              <div
+                key={index}
+                className="flex-shrink-0 h-10 md:h-12 w-auto grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              >
+                <Image
+                  src={logo.src}
+                  alt={logo.name}
+                  width={140}
+                  height={48}
+                  className="h-full w-auto object-contain"
+                  unoptimized
+                />
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

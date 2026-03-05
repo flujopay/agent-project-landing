@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Zap, Settings, BarChart3 } from "lucide-react";
+import { Check } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -12,8 +12,6 @@ const steps = [
     subtitle: "Gratis, sin compromiso",
     description: "Analizamos tu cartera, tu operación actual y tus objetivos. Te entregamos un plan personalizado.",
     image: "https://somossena.com/_next/static/media/sincroniza.2560a5fc.png",
-    icon: Zap,
-    color: "brand-secondary",
   },
   {
     number: 2,
@@ -21,8 +19,6 @@ const steps = [
     subtitle: "Nosotros hacemos todo",
     description: "Creamos tu estrategia de cobranza. Configuramos la plataforma. Integramos tus sistemas. Tú no tocas nada técnico.",
     image: "https://somossena.com/_next/static/media/autogestion.55341ed8.png",
-    icon: Settings,
-    color: "brand-primary",
   },
   {
     number: 3,
@@ -30,8 +26,6 @@ const steps = [
     subtitle: "Resultados medibles",
     description: "Comenzamos a gestionar tu cartera. Dashboard en vivo para que veas todo. Ajustes continuos para maximizar resultados.",
     image: "https://somossena.com/_next/static/media/home3.f4319194.png",
-    icon: BarChart3,
-    color: "brand-secondary",
   },
 ];
 
@@ -48,7 +42,7 @@ export const ComoTrabajamos = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section id="como-trabajamos" className="py-16 md:py-24 bg-slate-50">
+    <section id="como-trabajamos" className="py-20 md:py-28 bg-slate-50/50">
       <div className="max-w-[1280px] mx-auto px-4 md:px-8">
         {/* Header */}
         <motion.div
@@ -56,23 +50,20 @@ export const ComoTrabajamos = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-14 md:mb-20"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary font-semibold text-sm mb-4">
-            Proceso simple
-          </span>
           <h2 className="font-canaro font-extrabold text-3xl md:text-4xl lg:text-5xl text-brand-primary-dark mb-4">
             Así funciona
           </h2>
-          <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-500 text-lg max-w-xl mx-auto">
             En 3 pasos pasas de perseguir pagos a enfocarte en tu negocio
           </p>
         </motion.div>
 
         {/* Steps - Tab Style */}
-        <div className="mb-16">
+        <div className="mb-20">
           {/* Tab Headers */}
-          <div className="flex flex-col md:flex-row gap-3 md:gap-4 mb-8">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4 mb-10">
             {steps.map((step, index) => (
               <motion.button
                 key={step.number}
@@ -81,18 +72,18 @@ export const ComoTrabajamos = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 onClick={() => setActiveStep(index)}
-                className={`flex-1 p-4 md:p-5 rounded-xl text-left transition-all ${
+                className={`flex-1 p-5 md:p-6 rounded-2xl text-left transition-all duration-300 ${
                   activeStep === index
-                    ? "bg-brand-primary-dark text-white shadow-lg"
+                    ? "bg-brand-primary-dark text-white shadow-lg shadow-brand-primary-dark/20"
                     : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
                 }`}
               >
                 <div className="flex items-center gap-3 mb-2">
                   <div
-                    className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${
+                    className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold transition-colors ${
                       activeStep === index
                         ? "bg-brand-secondary text-white"
-                        : "bg-slate-200 text-slate-600"
+                        : "bg-slate-100 text-slate-500"
                     }`}
                   >
                     {step.number}
@@ -100,7 +91,7 @@ export const ComoTrabajamos = () => {
                   <span className="font-bold text-lg">{step.title}</span>
                 </div>
                 <p
-                  className={`text-sm ${
+                  className={`text-sm transition-colors ${
                     activeStep === index ? "text-slate-300" : "text-slate-500"
                   }`}
                 >
@@ -116,36 +107,36 @@ export const ComoTrabajamos = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden"
+            className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2">
               {/* Image */}
-              <div className="bg-gradient-to-br from-slate-100 to-slate-50 p-6 md:p-10 flex items-center justify-center">
+              <div className="bg-slate-50 p-8 md:p-12 flex items-center justify-center">
                 <div className="relative w-full max-w-md">
                   <Image
                     src={steps[activeStep].image}
                     alt={steps[activeStep].title}
                     width={500}
                     height={350}
-                    className="w-full h-auto rounded-xl shadow-md"
+                    className="w-full h-auto rounded-2xl"
                     unoptimized
                   />
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-6 md:p-10 flex flex-col justify-center">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-secondary/10 text-brand-secondary text-sm font-semibold mb-4 w-fit">
+              <div className="p-8 md:p-12 flex flex-col justify-center">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-secondary/10 text-brand-secondary text-sm font-semibold mb-5 w-fit">
                   <span>Paso {steps[activeStep].number}</span>
                 </div>
-                <h3 className="font-canaro font-bold text-2xl md:text-3xl text-brand-primary-dark mb-3">
+                <h3 className="font-canaro font-bold text-2xl md:text-3xl text-brand-primary-dark mb-4">
                   {steps[activeStep].title}
                 </h3>
                 <p className="text-slate-600 text-lg leading-relaxed mb-6">
                   {steps[activeStep].description}
                 </p>
                 {activeStep === 2 && (
-                  <div className="flex items-center gap-2 text-green-600 font-semibold">
+                  <div className="flex items-center gap-2 text-green-600 font-medium">
                     <Check className="h-5 w-5" />
                     <span>Primeros resultados en 2-3 semanas</span>
                   </div>
@@ -161,22 +152,24 @@ export const ComoTrabajamos = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="bg-gradient-to-r from-brand-primary-dark to-[#2a3f6e] rounded-2xl p-6 md:p-10"
+          className="bg-brand-primary-dark rounded-3xl p-8 md:p-12"
         >
-          <h4 className="font-canaro font-bold text-white text-xl md:text-2xl mb-6 text-center">
+          <h4 className="font-canaro font-bold text-white text-xl md:text-2xl mb-8 text-center">
             Todo incluido en tu proyecto
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {includes.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3"
+                className="flex items-center gap-3 bg-white/5 rounded-xl px-5 py-4"
               >
-                <Check className="h-5 w-5 text-brand-secondary flex-shrink-0" />
+                <div className="w-6 h-6 rounded-full bg-brand-secondary/20 flex items-center justify-center flex-shrink-0">
+                  <Check className="h-3.5 w-3.5 text-brand-secondary" />
+                </div>
                 <span className="text-white text-sm font-medium">{item}</span>
               </motion.div>
             ))}
