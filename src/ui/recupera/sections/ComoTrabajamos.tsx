@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { RotateCcw, Check } from "lucide-react";
 
 const STEP_MS = 4500;
@@ -280,7 +280,7 @@ type StepData = {
   label: string;
   titleParts: [string, string, string];
   description: string;
-  Illus: () => JSX.Element;
+  Illus: () => React.ReactElement;
 };
 
 const STEPS: StepData[] = [
