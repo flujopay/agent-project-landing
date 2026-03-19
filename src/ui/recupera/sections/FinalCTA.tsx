@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent } from "@/lib/analytics";
 import { usePostContactForm } from "@/lib/services/contactService";
 import { useCountries } from "@/lib/services/countryService";
 import { useCurrencyStore } from "@/lib/store/useCurrencyStore";
@@ -156,8 +157,11 @@ export const FinalCTA = () => {
     if (utmCampaign) form.append("utmCampaign", utmCampaign);
     if (utmContent) form.append("utmContent", utmContent);
 
+    trackEvent({ action: "form_submit", category: "contact", label: "contactar_especialista" });
+
     postContactFormMutate(form, {
       onSuccess: () => {
+        trackEvent({ action: "form_success", category: "contact", label: "lead_generado" });
         showToast({
           iconType: "success",
           message: "Formulario enviado correctamente",
