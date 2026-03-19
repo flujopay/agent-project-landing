@@ -287,22 +287,22 @@ const STEPS: StepData[] = [
   {
     number: "01",
     label: "Paso 1 de 3",
-    titleParts: ["Conecta tu ", "data", " con Sena"],
-    description: "Importa tu cartera desde Excel, ERP o cualquier fuente. Sena la recibe y la organiza automáticamente.",
+    titleParts: ["Nos cuentas ", "tu negocio", ""],
+    description: "Tu cartera, tus clientes, tu tono. Lo que necesitamos para representarte bien.",
     Illus: IllusStep1,
   },
   {
     number: "02",
     label: "Paso 2 de 3",
-    titleParts: ["Analiza tu ", "cartera", ""],
-    description: "Visualiza el estado de tu cartera en tiempo real. Identifica montos, antigüedad y riesgo de cada cuenta.",
+    titleParts: ["Diseñamos tu ", "estrategia", ""],
+    description: "No todos los clientes con atraso son iguales. Identificamos qué cuentas necesitan qué tratamiento y construimos el mix que maximiza la recuperación.",
     Illus: IllusStep2,
   },
   {
     number: "03",
     label: "Paso 3 de 3",
-    titleParts: ["Organiza y ", "categoriza", ""],
-    description: "Agrega segmentos, etiquetas y reglas propias de tu negocio. Tu cobranza, a tu manera.",
+    titleParts: ["Tecnología + ", "personas", ""],
+    description: "Plataforma de gestión, agentes de IA y especialistas humanos trabajando en conjunto. La combinación correcta para tu caso.",
     Illus: IllusStep3,
   },
 ];
@@ -356,10 +356,10 @@ export const ComoTrabajamos = () => {
           className="text-center mb-12 md:mb-16"
         >
           <h2 className="font-canaro font-extrabold text-3xl md:text-4xl lg:text-5xl text-brand-primary-dark mb-4">
-            Así funciona
+            Empieza en días, no en meses
           </h2>
           <p className="text-slate-500 text-lg max-w-xl mx-auto">
-            En 3 pasos pasas de perseguir pagos a enfocarte en tu negocio
+            Así funciona nuestro servicio de cobranza
           </p>
         </motion.div>
 
@@ -462,8 +462,8 @@ export const ComoTrabajamos = () => {
                     transition={{ delay: 0.4, duration: 0.55 }}
                     className="font-canaro font-extrabold text-3xl md:text-4xl text-brand-primary-dark mb-3 leading-tight"
                   >
-                    ¡Estás listo para gestionar{" "}
-                    <em className="not-italic" style={{ color: "#f6793a" }}>tu cobranza</em>!
+                    Tú monitoreas.{" "}
+                    <em className="not-italic" style={{ color: "#f6793a" }}>Nosotros cobramos.</em>
                   </motion.h3>
 
                   <motion.p
@@ -472,7 +472,7 @@ export const ComoTrabajamos = () => {
                     transition={{ delay: 0.8 }}
                     className="text-xs font-bold tracking-[2px] text-slate-400 uppercase mb-8"
                   >
-                    Todo tu ciclo en una sola plataforma
+                    Panel en tiempo real · Sin sorpresas · Sin microgestión
                   </motion.p>
 
                   <motion.div
@@ -502,7 +502,7 @@ export const ComoTrabajamos = () => {
                       style={{ borderColor: "rgba(246,121,58,0.4)", background: "rgba(246,121,58,0.05)" }}
                     >
                       <div className="w-5 h-5 rounded-full text-white text-[9px] font-extrabold flex items-center justify-center shrink-0" style={{ background: "#3771d1" }}>04</div>
-                      <span className="text-xs font-bold leading-tight" style={{ color: "#f6793a", maxWidth: 80 }}>¡Gestiona!</span>
+                      <span className="text-xs font-bold leading-tight" style={{ color: "#f6793a", maxWidth: 80 }}>¡A cobrar!</span>
                     </div>
                   </motion.div>
                 </motion.div>

@@ -7,29 +7,34 @@ import { motion } from "framer-motion";
 
 const faqs = [
   {
-    question: "¿Por qué Sena y no otra solución?",
+    question: "¿Sena es un software o un servicio de cobranza?",
     answer:
-      "No somos solo software. Somos tecnología + operación + estrategia. Entendemos tu industria, diseñamos tu proyecto completo y ejecutamos. Tú vendes, nosotros cobramos.",
+      "Es un servicio completo. Somos tu equipo externo de cobranza: combinamos plataforma tecnológica, agentes de IA y especialistas humanos. Tú vendes, nosotros cobramos.",
+  },
+  {
+    question: "¿Es como tener un equipo de cobranza propio?",
+    answer:
+      "Sí, pero sin los costos fijos. Piensa en Sena como tu área de cobranza on-demand: un equipo dedicado que conoce tu cartera, gestiona tus cuentas y te reporta resultados. Sin contratar, sin capacitar, sin rotación.",
   },
   {
     question: "¿Van a dañar mis relaciones con clientes?",
     answer:
-      "Todo lo contrario. 40 años nos enseñaron que preservar relaciones genera más valor. Nuestra cobranza es personalizada y profesional.",
+      "Todo lo contrario. La cobranza agresiva cobra una vez. La cobranza bien hecha fideliza. Cobramos como lo haría alguien de tu empresa: profesional, cuidado y alineado a tu relación con cada cliente.",
   },
   {
     question: "¿Cuánto tarda en ver resultados?",
     answer:
-      "Primeros acuerdos típicamente en 2-3 semanas. Implementación completa en días, no meses.",
+      "Primeros acuerdos de pago típicamente en 2-3 semanas. La implementación toma días, no meses.",
   },
   {
     question: "¿Se integra con mis sistemas?",
     answer:
-      "Sí. APIs para los ERPs más usados (SAP, Oracle, etc). O trabajamos con archivos si lo prefieres. Nosotros nos encargamos de la integración.",
+      "Sí. APIs para los ERPs más usados (SAP, Oracle, etc). O trabajamos con archivos si lo prefieres. Nos adaptamos a cómo operas hoy.",
   },
   {
     question: "¿Cuánto cuesta?",
     answer:
-      "Planes desde $39 USD/mes para la plataforma. Si necesitas equipo de cobranza, trabajamos con comisión por éxito, sin riesgo para ti. El diagnóstico inicial es gratis.",
+      "Depende de tu cartera. Si necesitas el servicio completo de cobranza, trabajamos con comisión por éxito — solo pagas cuando recuperamos. Sin setup complejo. El diagnóstico inicial es gratis.",
   },
 ];
 

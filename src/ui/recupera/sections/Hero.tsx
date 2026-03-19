@@ -171,34 +171,33 @@ export const Hero = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-secondary/[0.08] border border-brand-secondary/20 mb-8 w-fit">
             <span className="w-1.5 h-1.5 bg-brand-secondary rounded-full animate-pulse" />
             <span className="text-brand-secondary font-semibold text-xs uppercase tracking-wider">
-              Agente activo 24/7
+              Tu equipo de cobranza externo
             </span>
           </div>
 
           {/* Headline */}
           <h1 className="font-canaro text-brand-primary-dark text-4xl md:text-5xl lg:text-[3.2rem] xl:text-6xl font-extrabold leading-[1.05] tracking-tight mb-6">
-            Tu cartera
+            Cobrar es nuestro trabajo
+            <span className="text-brand-secondary font-serif">.</span>
             <br />
-            cobra{" "}
             <span className="text-brand-primary">
-              sola<span className="text-brand-secondary font-serif">.</span>
+              Crecer es el tuyo<span className="text-brand-secondary font-serif">.</span>
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-slate-500 text-base md:text-lg leading-relaxed mb-10 max-w-md border-l-2 border-slate-200 pl-4">
-            Sena no es otro software que tendrás que operar. Es una plataforma que{" "}
+            Sena es tu equipo externo de cobranza. Combinamos{" "}
             <strong className="text-brand-primary-dark">
-              gestiona tu cartera de cuentas por cobrar
+              tecnología, agentes de IA y especialistas humanos
             </strong>{" "}
-            — seguimiento, gestión con clientes y alertas tempranas — y solo te
-            interrumpe cuando necesita tu decisión.
+            para recuperar lo que te deben — sin que tengas que dedicarle un minuto.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-start gap-3 mb-12">
             <Button
-              text="Ver demo en vivo"
+              text="Cotizar para mi empresa"
               variant="secondaryFilled"
               size="lg"
               onClick={scrollToContact}
@@ -464,46 +463,6 @@ export const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Stats Bar */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-        className="border-t border-slate-100"
-      >
-        <div className="max-w-[1100px] mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-100">
-            <div className="py-8 md:py-10 text-center">
-              <div className="text-3xl md:text-4xl font-extrabold text-brand-primary-dark mb-1">
-                +85%
-              </div>
-              <div className="text-slate-500 text-sm">
-                Tasa de recuperación
-              </div>
-            </div>
-            <div className="py-8 md:py-10 text-center">
-              <div className="text-3xl md:text-4xl font-extrabold text-brand-primary-dark mb-1">
-                15
-              </div>
-              <div className="text-slate-500 text-sm">Países en LATAM</div>
-            </div>
-            <div className="py-8 md:py-10 text-center">
-              <div className="text-3xl md:text-4xl font-extrabold text-brand-primary-dark mb-1">
-                40+
-              </div>
-              <div className="text-slate-500 text-sm">
-                Años de experiencia
-              </div>
-            </div>
-            <div className="py-8 md:py-10 text-center">
-              <div className="text-3xl md:text-4xl font-extrabold text-brand-secondary mb-1">
-                146M
-              </div>
-              <div className="text-slate-500 text-sm">Gestiones al mes</div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
     </div>
   );
 };

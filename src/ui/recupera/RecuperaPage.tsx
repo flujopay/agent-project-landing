@@ -6,11 +6,11 @@ import { Footer } from "../layout/Footer";
 import { Header } from "../layout/Header";
 import Whatsapp from "../shared/WhatsApp";
 import { ComoTrabajamos } from "./sections/ComoTrabajamos";
-import { Credibility } from "./sections/Credibility";
 import { FAQ } from "./sections/FAQ";
 import { FinalCTA } from "./sections/FinalCTA";
 import { Hero } from "./sections/Hero";
 import { SocialProof } from "./sections/SocialProof";
+import { Testimonios } from "./sections/Testimonios";
 import { Transformacion } from "./sections/Transformacion";
 
 export const RecuperaPage = () => {
@@ -43,7 +43,7 @@ export const RecuperaPage = () => {
         <SocialProof />
         <Transformacion />
         <ComoTrabajamos />
-        <Credibility />
+        <Testimonios />
         <FAQ />
         <FinalCTA />
       </div>

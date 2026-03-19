@@ -189,10 +189,10 @@ export const FinalCTA = () => {
             transition={{ duration: 0.5 }}
           >
             <h2 className="font-canaro font-extrabold text-3xl md:text-4xl lg:text-5xl text-white mb-5 leading-tight">
-              Tu operación financiera puede ser otra
+              ¿Cuánto tienes por cobrar?
             </h2>
             <p className="text-slate-300 text-lg md:text-xl mb-10">
-              Agenda tu diagnóstico gratuito. Sin compromiso. Respuesta en 24h.
+              Cuéntanos tu caso. En 48 horas te decimos cómo podemos ayudarte.
             </p>
 
             <div className="space-y-4 mb-10">
@@ -200,25 +200,21 @@ export const FinalCTA = () => {
                 <div className="w-10 h-10 bg-brand-secondary/20 rounded-xl flex items-center justify-center flex-shrink-0">
                   <Check className="h-5 w-5 text-brand-secondary" />
                 </div>
-                <span className="text-white text-lg">Respuesta en 24 horas</span>
+                <span className="text-white text-lg">Sin compromisos</span>
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 bg-brand-secondary/20 rounded-xl flex items-center justify-center flex-shrink-0">
                   <Check className="h-5 w-5 text-brand-secondary" />
                 </div>
-                <span className="text-white text-lg">Sin compromiso</span>
+                <span className="text-white text-lg">Sin setup complejo</span>
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 bg-brand-secondary/20 rounded-xl flex items-center justify-center flex-shrink-0">
                   <Check className="h-5 w-5 text-brand-secondary" />
                 </div>
-                <span className="text-white text-lg">Desde $39 USD/mes</span>
+                <span className="text-white text-lg">Tú defines el ritmo</span>
               </div>
             </div>
-
-            <p className="text-brand-secondary font-medium text-sm">
-              Cupos limitados para diagnósticos este mes
-            </p>
           </motion.div>
 
           {/* Right: Form */}
@@ -234,10 +230,10 @@ export const FinalCTA = () => {
             >
               <div className="text-center mb-8">
                 <h3 className="font-canaro font-bold text-2xl text-brand-primary-dark mb-2">
-                  Agenda tu diagnóstico
+                  Contactar a un especialista
                 </h3>
                 <p className="text-slate-500">
-                  Completa el formulario y te contactamos
+                  Completa el formulario y te respondemos en 48 horas
                 </p>
               </div>
 
@@ -340,7 +336,7 @@ export const FinalCTA = () => {
               <Button
                 type="submit"
                 text={
-                  isLoadingPostContactForm ? "Enviando..." : "Agendar diagnóstico gratis"
+                  isLoadingPostContactForm ? "Enviando..." : "Contactar a un especialista"
                 }
                 variant="secondaryFilled"
                 size="lg"
