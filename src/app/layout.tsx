@@ -11,21 +11,21 @@ import "./globals.css";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
-  title: "Recupera - El mejor CRM de cobranza y pagos B2B",
+  title: "Opera by Sena — La plataforma de cobranza B2B",
   description:
-    "Optimiza tu gestión de cobranza y pagos de facturas con Recupera, el CRM B2B que simplifica procesos, mejora la eficiencia y acelera tus ingresos.",
+    "Opera by Sena: la plataforma de cobranza B2B que se adapta a tu operación. Implementación estratégica, agentes inteligentes y resultados reales.",
   keywords:
-    "CRM cobranza, pagos B2B, facturación, gestión de pagos, CRM empresas, automatización de cobranza, Recupera",
-  authors: [{ name: "Recupera" }],
+    "Opera, Sena, cobranza B2B, plataforma de cobranza, agentes de cobranza, automatización de cobranza, gestión de cartera",
+  authors: [{ name: "Sena" }],
   robots: { index: true, follow: true },
   openGraph: {
-    title: "Recupera - El mejor CRM de cobranza y pagos B2B",
+    title: "Opera by Sena — La plataforma de cobranza B2B",
     description:
-      "Con Recupera, simplifica y acelera la gestión de tus cobros y pagos. Una solución para empresas enfocada en eficiencia y resultados.",
+      "Opera by Sena: la plataforma de cobranza B2B que se adapta a tu operación. Implementación estratégica, agentes inteligentes y resultados reales.",
     type: "website",
     url: "https://recupera.somossena.com",
     images: ["https://recupera.somossena.com/sena-crm-lite.jpg"],
-    siteName: "Recupera",
+    siteName: "Opera by Sena",
     locale: "es_PE",
   },
   other: {
@@ -105,7 +105,7 @@ export default async function RootLayout({
           <ModalRenderer />
           <Toast />
           <Whatsapp
-            message="Hola, vi su web y quiero saber más sobre Recupera y cómo funciona."
+            message="Hola, vi su web y quiero saber más sobre Opera by Sena y cómo funciona."
             animated
           />
         </body>
