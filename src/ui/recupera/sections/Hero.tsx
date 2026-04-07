@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/ui/shared/Button";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent, trackPixel } from "@/lib/analytics";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -133,6 +133,7 @@ const AgentFeed = () => {
 export const Hero = () => {
   const scrollToContact = () => {
     trackEvent({ action: "cta_click", category: "hero", label: "cotizar_para_mi_empresa" });
+    trackPixel("Contact", { source: "hero_cta" });
     const element = document.getElementById("contacto");
     if (element) {
       const offset = 72;

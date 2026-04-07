@@ -1,6 +1,6 @@
 "use client";
 
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent, trackPixel } from "@/lib/analytics";
 import { useCurrencyStore } from "@/lib/store/useCurrencyStore";
 import { CSSProperties } from "react";
 
@@ -50,6 +50,7 @@ const Whatsapp = ({
     <a
       onClick={() => {
         trackEvent({ action: "whatsapp_click", category: "contact", label: "floating_button" });
+        trackPixel("Contact", { source: "whatsapp_floating" });
         if (typeof callback === "function") {
           callback();
         }

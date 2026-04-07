@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent, trackLead, trackPixel } from "@/lib/analytics";
 import {
   usePostContactForm,
   usePostTestn8n,
@@ -101,6 +102,9 @@ export const FinalCTA = () => {
   });
 
   const onSubmit = (data: FormData) => {
+    trackEvent({ action: "form_submit", category: "form", label: "contact_form" });
+    trackPixel("InitiateCheckout");
+
     const pais =
       countries?.find((c) => c.country === countrySelect)?.country_code || "";
     const telefonoConPrefijo = (countrySelect || "") + data.whatsapp;
@@ -134,6 +138,7 @@ export const FinalCTA = () => {
     postContactFormMutate(contactPayload);
     postTestn8nMutate(payload, {
       onSuccess: () => {
+        trackLead({ content_name: "contact_form", country: pais });
         showToast({
           iconType: "success",
           message: "Formulario enviado correctamente",

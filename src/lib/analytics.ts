@@ -8,6 +8,7 @@ type GtagEvent = {
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    fbq?: (...args: unknown[]) => void;
   }
 }
 
@@ -19,4 +20,19 @@ export const trackEvent = ({ action, category, label, value }: GtagEvent) => {
       value,
     });
   }
+};
+
+export const trackPixel = (
+  event: string,
+  params?: Record<string, unknown>,
+  type: "track" | "trackCustom" = "track",
+) => {
+  if (typeof window !== "undefined" && window.fbq) {
+    window.fbq(type, event, params);
+  }
+};
+
+export const trackLead = (params?: Record<string, unknown>) => {
+  trackEvent({ action: "generate_lead", category: "form", label: "contact_form" });
+  trackPixel("Lead", params);
 };
