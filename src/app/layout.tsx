@@ -23,10 +23,10 @@ export const metadata: Metadata = {
     description:
       "Opera by Sena: la plataforma de cobranza B2B que se adapta a tu operación. Implementación estratégica, agentes inteligentes y resultados reales.",
     type: "website",
-    url: "https://recupera.somossena.com",
-    images: ["https://recupera.somossena.com/sena-crm-lite.jpg"],
+    url: "https://opera.somossena.com",
+    images: ["https://opera.somossena.com/sena-crm-lite.jpg"],
     siteName: "Opera by Sena",
-    locale: "es_PE",
+    locale: "es_CL",
   },
   other: {
     "facebook-domain-verification": "tyjmxihsgkrx666ql4rwmnhsftl6hv",
