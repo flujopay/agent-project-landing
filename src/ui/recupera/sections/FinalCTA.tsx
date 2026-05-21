@@ -1,10 +1,13 @@
 "use client";
 
 import { trackEvent, trackLead, trackPixel } from "@/lib/analytics";
-import {
-  usePostContactForm,
-  usePostTestn8n,
-} from "@/lib/services/contactService";
+import { usePostContactForm } from "@/lib/services/contactService";
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 import { useCountries } from "@/lib/services/countryService";
 import { useCurrencyStore } from "@/lib/store/useCurrencyStore";
 import { useToastStore } from "@/lib/store/useToastStore";
@@ -32,7 +35,6 @@ type FormData = {
 };
 
 export const FinalCTA = () => {
-  const { postTestn8nMutate, isLoadingPostTestn8n } = usePostTestn8n();
   const { postContactFormMutate, isLoadingPostContactForm } =
     usePostContactForm();
   const { data: countries = [] } = useCountries();
@@ -109,14 +111,6 @@ export const FinalCTA = () => {
       countries?.find((c) => c.country === countrySelect)?.country_code || "";
     const telefonoConPrefijo = (countrySelect || "") + data.whatsapp;
 
-    // Payload para n8n webhook
-    const payload = {
-      ...data,
-      codigo_pais: countrySelect || "",
-      pais,
-    };
-
-    // Payload para API de contacto
     const contactPayload: ContactFormRequest = {
       nombre: data.nombre,
       apellido: data.apellido,
@@ -124,7 +118,7 @@ export const FinalCTA = () => {
       telefono: telefonoConPrefijo,
       formOrigin: "Formulario de Registro",
       countryName: pais,
-      productType: "main",
+      productType: "opera",
       nombreEmpresa: data.empresa,
       mensaje: "",
       howFound: "",
@@ -134,11 +128,12 @@ export const FinalCTA = () => {
       utmContent: utmContent || undefined,
     };
 
-    // Llamar ambas APIs
-    postContactFormMutate(contactPayload);
-    postTestn8nMutate(payload, {
+    postContactFormMutate(contactPayload, {
       onSuccess: () => {
-        trackLead({ content_name: "contact_form", country: pais });
+        if (window.gtag) {
+          window.gtag("event", "conversion", { send_to: "AW-17962976949/TyATCOr4nKccELWNtfVC" });
+        }
+        trackLead({ content_name: "opera" });
         showToast({
           iconType: "success",
           message: "Formulario enviado correctamente",
@@ -441,16 +436,16 @@ export const FinalCTA = () => {
               <Button
                 type="submit"
                 text={
-                  isLoadingPostTestn8n
+                  isLoadingPostContactForm
                     ? "Enviando..."
                     : "Contactar a un especialista"
                 }
                 variant="secondaryFilled"
                 size="lg"
                 className="w-full"
-                disabled={isLoadingPostTestn8n}
+                disabled={isLoadingPostContactForm}
                 rightIcon={
-                  !isLoadingPostTestn8n ? (
+                  !isLoadingPostContactForm ? (
                     <ArrowRight className="h-5 w-5" />
                   ) : undefined
                 }

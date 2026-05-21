@@ -48,19 +48,9 @@ export default async function RootLayout({
     <Providers country={country} countries={countries}>
       <html lang="es" dir="ltr">
         <head>
-          {/* Google Tag Manager Script (carga diferida) */}
-          <Script id="gtm-script" strategy="lazyOnload">
-            {`
-                      (function(w,d,s,l,i){
-                          w[l]=w[l]||[];
-                          w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-                          var f=d.getElementsByTagName(s)[0],
-                          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-                          j.async=true;
-                          j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-                          f.parentNode.insertBefore(j,f);
-                          })(window,document,'script','dataLayer','GTM-T2QDCJ6C');
-                          `}
+          {/* Google Tag Manager — Opera (GTM-52ZMKFRM) */}
+          <Script id="gtm-script" strategy="afterInteractive">
+            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-52ZMKFRM');`}
           </Script>
           {/* Google Analytics + Google Ads */}
           <Script
@@ -87,7 +77,7 @@ export default async function RootLayout({
               t.src=v;s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window,document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '657664103266465');
+              fbq('init', '1585154825921176');
               fbq('track', 'PageView');
             `}
           </Script>
@@ -96,7 +86,7 @@ export default async function RootLayout({
               height="1"
               width="1"
               style={{ display: "none" }}
-              src="https://www.facebook.com/tr?id=657664103266465&ev=PageView&noscript=1"
+              src="https://www.facebook.com/tr?id=1585154825921176&ev=PageView&noscript=1"
               alt=""
             />
           </noscript>
@@ -119,7 +109,7 @@ export default async function RootLayout({
           {/* Fallback para Google Tag Manager */}
           <noscript>
             <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-T2QDCJ6C"
+              src="https://www.googletagmanager.com/ns.html?id=GTM-52ZMKFRM"
               height="0"
               width="0"
               style={{ display: "none", visibility: "hidden" }}
