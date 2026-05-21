@@ -18,6 +18,14 @@ export const metadata: Metadata = {
     "Opera, Sena, cobranza B2B, plataforma de cobranza, agentes de cobranza, automatización de cobranza, gestión de cartera",
   authors: [{ name: "Sena" }],
   robots: { index: true, follow: true },
+  metadataBase: new URL("https://opera.somossena.com"),
+  alternates: { canonical: "/" },
+  twitter: {
+    card: "summary_large_image",
+    title: "Opera by Sena — La plataforma de cobranza B2B",
+    description: "Opera by Sena: la plataforma de cobranza B2B que se adapta a tu operación.",
+    images: ["https://opera.somossena.com/sena-crm-lite.jpg"],
+  },
   openGraph: {
     title: "Opera by Sena — La plataforma de cobranza B2B",
     description:
