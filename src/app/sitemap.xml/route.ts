@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseUrl = "https://recupera.somossena.com";
+  const baseUrl = "https://opera.somossena.com";
 
   const pages = [
     { path: "", priority: "1.0" },
