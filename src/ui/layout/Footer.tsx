@@ -38,7 +38,7 @@ export const Footer = () => {
         </div>
 
         {/* Newsletter - Mobile */}
-        <div className="md:hidden mb-6">
+        <div className="hidden">
           <h3 className="font-bold text-xs mb-4 uppercase tracking-wide">
             SUSCRÍBETE A NUESTRO NEWSLETTER
           </h3>
@@ -197,7 +197,7 @@ export const Footer = () => {
         </div>
 
         {/* Desktop layout */}
-        <div className="hidden md:grid grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-6 mb-8">
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-6 mb-8">
           <div className="space-y-3">
             <h3 className="font-bold text-sm mb-4 uppercase tracking-wide">
               EMPRESA
@@ -286,7 +286,7 @@ export const Footer = () => {
           </div>
 
           {/* Newsletter - Desktop */}
-          <div className="col-span-2 lg:col-span-1">
+          <div className="hidden col-span-2 lg:col-span-1">
             <h3 className="font-bold text-sm mb-6 uppercase tracking-wide">
               SUSCRÍBETE A NUESTRO NEWSLETTER
             </h3>
