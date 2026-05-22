@@ -194,11 +194,12 @@ async function sendMetaCapi(body: LeadPayload): Promise<void> {
 
   try {
     await fetch(
-      `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${capiToken}`,
+      `https://graph.facebook.com/v21.0/${pixelId}/events`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          access_token: capiToken,
           data: [
             {
               event_name: "Lead",
@@ -217,7 +218,7 @@ async function sendMetaCapi(body: LeadPayload): Promise<void> {
       }
     );
   } catch (err) {
-    console.error("[CAPI] error:", err);
+    console.error("[CAPI] error:", err instanceof Error ? err.message : "CAPI error");
   }
 }
 
@@ -242,6 +243,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Faltan campos requeridos" }, { status: 400 });
   }
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return NextResponse.json({ error: "Email inválido" }, { status: 400 });
+  }
+
   const capiPromise = sendMetaCapi(body);
 
   try {
@@ -250,7 +256,7 @@ export async function POST(req: NextRequest) {
     await capiPromise;
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("[HubSpot] error:", err);
+    console.error("[HubSpot] error:", err instanceof Error ? err.message : "CRM error");
     await capiPromise;
     return NextResponse.json({ ok: true, warning: "CRM sync pendiente" });
   }
