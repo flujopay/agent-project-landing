@@ -247,7 +247,7 @@ export const FinalCTA = () => {
               </div>
 
               <div className="flex flex-1 w-full">
-                <form onSubmit={handleSubmit(onSubmit)} className="w-full ">
+                <div className="w-full">
                   {/* Campo 1 — Nombre y Apellido */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <Controller
@@ -448,7 +448,7 @@ export const FinalCTA = () => {
                       </p>
                     )}
                   </div>
-                </form>
+                </div>
               </div>
 
               <p className="text-xs text-slate-500 mt-5 mb-5">
