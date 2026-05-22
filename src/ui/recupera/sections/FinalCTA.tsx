@@ -6,6 +6,7 @@ import { usePostContactForm } from "@/lib/services/contactService";
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    fbq?: (...args: unknown[]) => void;
   }
 }
 import { useCountries } from "@/lib/services/countryService";
@@ -20,7 +21,7 @@ import SimpleCountrySelect, {
 import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -40,6 +41,7 @@ export const FinalCTA = () => {
   const { data: countries = [] } = useCountries();
   const { ipCurrency } = useCurrencyStore();
   const { showToast } = useToastStore();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [countrySelect, setCountrySelect] = useState<string | null>(null);
 
@@ -47,6 +49,9 @@ export const FinalCTA = () => {
   const utmMedium = searchParams?.get("utm_medium") || null;
   const utmCampaign = searchParams?.get("utm_campaign") || null;
   const utmContent = searchParams?.get("utm_content") || null;
+  const utmTerm = searchParams?.get("utm_term") || null;
+  const [gclid, setGclid] = useState<string | null>(null);
+  const [fbclid, setFbclid] = useState<string | null>(null);
 
   const countryOptions = useMemo(() => {
     if (!countries.length) return [];
@@ -86,6 +91,14 @@ export const FinalCTA = () => {
     }
   }, [ipCurrency]);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const gc = params.get("gclid") || sessionStorage.getItem("gclid");
+    const fb = params.get("fbclid") || sessionStorage.getItem("fbclid");
+    if (gc) { setGclid(gc); sessionStorage.setItem("gclid", gc); }
+    if (fb) { setFbclid(fb); sessionStorage.setItem("fbclid", fb); }
+  }, []);
+
   const {
     control,
     handleSubmit,
@@ -111,6 +124,29 @@ export const FinalCTA = () => {
       countries?.find((c) => c.country === countrySelect)?.country_code || "";
     const telefonoConPrefijo = (countrySelect || "") + data.whatsapp;
 
+    // Fire-and-forget HubSpot sync
+    fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nombre: data.nombre,
+        apellido: data.apellido,
+        empresa: data.empresa,
+        email: data.email,
+        telefono: telefonoConPrefijo,
+        facturas_pendientes: data.facturas_pendientes,
+        alguien_cobrando: data.alguien_cobrando,
+        utmSource: utmSource ?? undefined,
+        utmMedium: utmMedium ?? undefined,
+        utmCampaign: utmCampaign ?? undefined,
+        utmContent: utmContent ?? undefined,
+        utmTerm: utmTerm ?? undefined,
+        gclid: gclid ?? undefined,
+        fbclid: fbclid ?? undefined,
+        landingPage: window.location.pathname,
+      }),
+    }).catch(() => {});
+
     const contactPayload: ContactFormRequest = {
       nombre: data.nombre,
       apellido: data.apellido,
@@ -133,13 +169,12 @@ export const FinalCTA = () => {
         if (window.gtag) {
           window.gtag("event", "conversion", { send_to: "AW-17962976949/TyATCOr4nKccELWNtfVC" });
         }
+        if (window.fbq) {
+          window.fbq("track", "Lead", { content_name: "opera" });
+        }
         trackLead({ content_name: "opera" });
-        showToast({
-          iconType: "success",
-          message: "Formulario enviado correctamente",
-          subMessage: "Gracias, pronto nos pondremos en contacto contigo.",
-        });
         reset();
+        router.push("/thankyou");
       },
       onError: () => {
         showToast({
