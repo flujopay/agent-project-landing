@@ -3,12 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 type LeadPayload = {
   nombre: string;
-  apellido: string;
+  apellido?: string;
   empresa: string;
   email: string;
   telefono: string;
-  facturas_pendientes: string;
-  alguien_cobrando: string;
+  facturas_pendientes?: string;
+  alguien_cobrando?: string;
   utmSource?: string;
   utmMedium?: string;
   utmCampaign?: string;
@@ -22,25 +22,25 @@ type LeadPayload = {
 const HS_API = "https://api.hubapi.com";
 const OWNER_FRANCISCO = "89319447";
 const PRODUCT_LIST_ID = "364";
-const INTERES_DEL_PRODUCTO = "Cuentas por Cobrar";
+const INTERES_DEL_PRODUCTO = "Opera";
 
 function mapOrigen(utmSource?: string): string {
   const src = (utmSource ?? "").toLowerCase();
   if (src === "google" || src === "cpc") return "Google";
-  if (src === "facebook" || src === "meta" || src === "fb") return "true";
+  if (src === "facebook" || src === "meta" || src === "fb") return "Meta";
   if (src === "linkedin") return "LinkedIn";
   return "Orgánico";
 }
 
 function calcPrioridad(
-  facturas: string,
-  cobrando: string
+  facturas?: string,
+  cobrando?: string
 ): "A" | "B" | "C" {
   let score = 0;
   if (facturas === "50+") score += 2;
   else if (facturas === "10-50") score += 1;
 
-  const c = cobrando.toLowerCase().trim();
+  const c = (cobrando ?? "").toLowerCase().trim();
   if (c === "no") score += 2;
   else if (c === "a veces") score += 1;
 
@@ -90,7 +90,6 @@ async function upsertContact(token: string, body: LeadPayload): Promise<string> 
 
   const properties: Record<string, string> = {
     firstname: body.nombre,
-    lastname: body.apellido,
     email: body.email,
     phone: body.telefono,
     company: body.empresa,
@@ -102,11 +101,12 @@ async function upsertContact(token: string, body: LeadPayload): Promise<string> 
     fuente_del_lead: fuente,
     sena_prioridad: prioridad,
     sena_intencion: calcSenaIntencion(prioridad),
-    facturas_pendientes: body.facturas_pendientes,
-    alguien_cobrando: normalizeCobrando(body.alguien_cobrando),
-    sena_contexto: `Lead landing Opera. Facturas: ${body.facturas_pendientes}. Cobrando: ${body.alguien_cobrando}. Prioridad auto: ${prioridad}. Origen: ${origen}.`,
+    sena_contexto: `Lead landing Opera. Prioridad auto: ${prioridad}. Origen: ${origen}.`,
   };
 
+  if (body.apellido) properties.lastname = body.apellido;
+  if (body.facturas_pendientes) properties.facturas_pendientes = body.facturas_pendientes;
+  if (body.alguien_cobrando) properties.alguien_cobrando = normalizeCobrando(body.alguien_cobrando);
   if (body.gclid) properties.gclid = body.gclid;
   if (body.fbclid) properties.fbclid = body.fbclid;
   if (body.landingPage) properties.landing_page = body.landingPage;
@@ -154,7 +154,7 @@ async function createDeal(token: string, contactId: string, body: LeadPayload): 
         pipeline: "default",
         hubspot_owner_id: OWNER_FRANCISCO,
         closedate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
-        description: `Prioridad: ${prioridad} · Facturas: ${body.facturas_pendientes} · Cobrando: ${body.alguien_cobrando}`,
+        description: `Prioridad: ${prioridad}${body.facturas_pendientes ? ` · Facturas: ${body.facturas_pendientes}` : ""}${body.alguien_cobrando ? ` · Cobrando: ${body.alguien_cobrando}` : ""}`,
       },
     }),
   });
@@ -237,9 +237,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Payload inválido" }, { status: 400 });
   }
 
-  const { nombre, apellido, empresa, email, telefono, facturas_pendientes, alguien_cobrando } =
-    body;
-  if (!nombre || !apellido || !empresa || !email || !telefono || !facturas_pendientes || !alguien_cobrando) {
+  const { nombre, empresa, email, telefono } = body;
+  if (!nombre || !empresa || !email || !telefono) {
     return NextResponse.json({ error: "Faltan campos requeridos" }, { status: 400 });
   }
 
