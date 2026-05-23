@@ -257,6 +257,6 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error("[HubSpot] error:", err instanceof Error ? err.message : "CRM error");
     await capiPromise;
-    return NextResponse.json({ ok: true, warning: err instanceof Error ? err.message : "CRM sync pendiente" });
+    return NextResponse.json({ ok: true, warning: "CRM sync pendiente" });
   }
 }
