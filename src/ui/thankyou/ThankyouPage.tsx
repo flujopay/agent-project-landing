@@ -10,6 +10,7 @@ declare global {
   interface Window {
     dataLayer?: Record<string, unknown>[];
     fbq?: (...args: unknown[]) => void;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -24,8 +25,11 @@ export const ThankyouPage = () => {
       event: "conversion_event_signup_2",
       origin: "opera",
     });
+    if (window.gtag) {
+      window.gtag("event", "conversion", { send_to: "AW-17962976949/TyATCOr4nKccELWNtfVC" });
+    }
     if (window.fbq) {
-      window.fbq("track", "Lead");
+      window.fbq("track", "Lead", { content_name: "opera" });
     }
   }, []);
 
