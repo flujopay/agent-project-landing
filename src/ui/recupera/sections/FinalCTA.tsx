@@ -1,14 +1,7 @@
 "use client";
 
-import { trackEvent, trackLead, trackPixel } from "@/lib/analytics";
+import { trackEvent, trackPixel } from "@/lib/analytics";
 import { usePostContactForm } from "@/lib/services/contactService";
-
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-    fbq?: (...args: unknown[]) => void;
-  }
-}
 import { useCountries } from "@/lib/services/countryService";
 import { useCurrencyStore } from "@/lib/store/useCurrencyStore";
 import { useToastStore } from "@/lib/store/useToastStore";
@@ -166,13 +159,6 @@ export const FinalCTA = () => {
 
     postContactFormMutate(contactPayload, {
       onSuccess: () => {
-        if (window.gtag) {
-          window.gtag("event", "conversion", { send_to: "AW-17962976949/TyATCOr4nKccELWNtfVC" });
-        }
-        if (window.fbq) {
-          window.fbq("track", "Lead", { content_name: "opera" });
-        }
-        trackLead({ content_name: "opera" });
         reset();
         router.push("/thankyou");
       },
