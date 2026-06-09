@@ -1,11 +1,9 @@
 "use client";
 
 import { trackEvent, trackPixel } from "@/lib/analytics";
-import { usePostContactForm } from "@/lib/services/contactService";
 import { useCountries } from "@/lib/services/countryService";
 import { useCurrencyStore } from "@/lib/store/useCurrencyStore";
 import { useToastStore } from "@/lib/store/useToastStore";
-import { ContactFormRequest } from "@/lib/types/contact";
 import Button from "@/ui/shared/Button";
 import { Input } from "@/ui/shared/Input";
 import SimpleCountrySelect, {
@@ -29,8 +27,7 @@ type FormData = {
 };
 
 export const FinalCTA = () => {
-  const { postContactFormMutate, isLoadingPostContactForm } =
-    usePostContactForm();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { data: countries = [] } = useCountries();
   const { ipCurrency } = useCurrencyStore();
   const { showToast } = useToastStore();
@@ -109,67 +106,49 @@ export const FinalCTA = () => {
     },
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     trackEvent({ action: "form_submit", category: "form", label: "contact_form" });
     trackPixel("InitiateCheckout");
 
-    const pais =
-      countries?.find((c) => c.country === countrySelect)?.country_code || "";
     const telefonoConPrefijo = (countrySelect || "") + data.whatsapp;
+    setIsSubmitting(true);
 
-    // Fire-and-forget HubSpot sync
-    fetch("/api/lead", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        nombre: data.nombre,
-        apellido: data.apellido,
-        empresa: data.empresa,
-        email: data.email,
-        telefono: telefonoConPrefijo,
-        facturas_pendientes: data.facturas_pendientes,
-        alguien_cobrando: data.alguien_cobrando,
-        utmSource: utmSource ?? undefined,
-        utmMedium: utmMedium ?? undefined,
-        utmCampaign: utmCampaign ?? undefined,
-        utmContent: utmContent ?? undefined,
-        utmTerm: utmTerm ?? undefined,
-        gclid: gclid ?? undefined,
-        fbclid: fbclid ?? undefined,
-        landingPage: window.location.pathname,
-      }),
-    }).catch(() => {});
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: data.nombre,
+          apellido: data.apellido,
+          empresa: data.empresa,
+          email: data.email,
+          telefono: telefonoConPrefijo,
+          facturas_pendientes: data.facturas_pendientes,
+          alguien_cobrando: data.alguien_cobrando,
+          utmSource: utmSource ?? undefined,
+          utmMedium: utmMedium ?? undefined,
+          utmCampaign: utmCampaign ?? undefined,
+          utmContent: utmContent ?? undefined,
+          utmTerm: utmTerm ?? undefined,
+          gclid: gclid ?? undefined,
+          fbclid: fbclid ?? undefined,
+          landingPage: window.location.pathname,
+        }),
+      });
 
-    const contactPayload: ContactFormRequest = {
-      nombre: data.nombre,
-      apellido: data.apellido,
-      correo: data.email,
-      telefono: telefonoConPrefijo,
-      formOrigin: "Formulario de Registro",
-      countryName: pais,
-      productType: "opera",
-      nombreEmpresa: data.empresa,
-      mensaje: "",
-      howFound: "",
-      utmSource: utmSource || undefined,
-      utmMedium: utmMedium || undefined,
-      utmCampaign: utmCampaign || undefined,
-      utmContent: utmContent || undefined,
-    };
+      if (!res.ok) throw new Error("API error");
 
-    postContactFormMutate(contactPayload, {
-      onSuccess: () => {
-        reset();
-        router.push("/thankyou");
-      },
-      onError: () => {
-        showToast({
-          iconType: "error",
-          message: "Error al enviar el formulario",
-          subMessage: "Por favor, intenta de nuevo.",
-        });
-      },
-    });
+      reset();
+      router.push("/thankyou");
+    } catch {
+      showToast({
+        iconType: "error",
+        message: "Error al enviar el formulario",
+        subMessage: "Por favor, intenta de nuevo.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -457,16 +436,16 @@ export const FinalCTA = () => {
               <Button
                 type="submit"
                 text={
-                  isLoadingPostContactForm
+                  isSubmitting
                     ? "Enviando..."
                     : "Contactar a un especialista"
                 }
                 variant="secondaryFilled"
                 size="lg"
                 className="w-full"
-                disabled={isLoadingPostContactForm}
+                disabled={isSubmitting}
                 rightIcon={
-                  !isLoadingPostContactForm ? (
+                  !isSubmitting ? (
                     <ArrowRight className="h-5 w-5" />
                   ) : undefined
                 }
