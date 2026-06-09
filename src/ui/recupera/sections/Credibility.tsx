@@ -47,7 +47,7 @@ export const Credibility = () => {
             40 años respaldan cada decisión
           </h2>
           <p className="text-slate-500 text-lg max-w-xl mx-auto">
-            Sena nace de Recsa, referente en gestión de cartera en Latinoamérica
+            Opera está construido sobre 40 años de experiencia operativa de Recsa en cobranza B2B.
           </p>
         </motion.div>
 
