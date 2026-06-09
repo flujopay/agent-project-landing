@@ -34,7 +34,7 @@ const faqs = [
   {
     question: "¿Cuánto cuesta?",
     answer:
-      "Depende de tu cartera. Si necesitas el servicio completo de cobranza, trabajamos con comisión por éxito — solo pagas cuando recuperamos. Sin setup complejo. El diagnóstico inicial es gratis.",
+      "Depende del tamaño de tu cartera y el alcance de la operación. Lo vemos en el diagnóstico. Agenda una reunión y te mostramos el modelo con un demo real de cómo opera tu empresa.",
   },
 ];
 
