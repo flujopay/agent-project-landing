@@ -6,7 +6,7 @@ const SENA_BASE_URL = "https://www.somossena.com";
 export const SOCIAL_LINKS = {
   facebook: "https://www.facebook.com/sena.latam",
   instagram: "https://www.instagram.com/sena.latam",
-  linkedin: "https://www.linkedin.com/company/flujolink/posts/?feedView=all",
+  linkedin: "https://www.linkedin.com/company/sena-latam",
   youtube: "https://www.youtube.com/@flujolink",
 };
 
