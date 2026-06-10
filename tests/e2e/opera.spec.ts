@@ -29,15 +29,27 @@ test('submit sin datos muestra errores de validación', async ({ page }) => {
   await expect(page.getByText(/el nombre es obligatorio/i)).toBeVisible({ timeout: 5_000 })
 })
 
-test('/thankyou muestra confirmación y link de agendamiento con francisco502', async ({ page }) => {
+test('/thankyou muestra confirmación, embed HubSpot y botón WhatsApp', async ({ page }) => {
   await page.goto('/thankyou')
 
   await expect(page.getByText(/hemos recibido tus datos/i)).toBeVisible({ timeout: 15_000 })
 
-  const meetingLink = page.getByRole('link', { name: /agendar/i })
-  await expect(meetingLink).toBeVisible()
-  const href = await meetingLink.getAttribute('href')
-  expect(href).toContain('meetings.hubspot.com/francisco502')
+  // HubSpot embed container
+  const embedContainer = page.locator('.meetings-iframe-container')
+  await expect(embedContainer).toBeAttached()
+  const dataSrc = await embedContainer.getAttribute('data-src')
+  expect(dataSrc).toContain('meetings.hubspot.com/francisco502')
+
+  // Fallback link
+  const fallbackLink = page.getByRole('link', { name: /abrir calendario/i })
+  await expect(fallbackLink).toBeVisible()
+
+  // WhatsApp button
+  const waLink = page.getByRole('link', { name: /hablar por whatsapp/i })
+  await expect(waLink).toBeVisible()
+  const waHref = await waLink.getAttribute('href')
+  expect(waHref).toContain('wa.me/56977290160')
+  expect(waHref).toContain('Opera')
 })
 
 test('header muestra CTA "Agendar diagnóstico" sin "Iniciar sesión"', async ({ page }) => {
