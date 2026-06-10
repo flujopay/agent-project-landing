@@ -58,3 +58,11 @@ test('header muestra CTA "Agendar diagnóstico" sin "Iniciar sesión"', async ({
   await expect(page.getByRole('button', { name: /agendar diagnóstico/i })).toBeVisible({ timeout: 10_000 })
   await expect(page.getByRole('button', { name: /iniciar sesión/i })).not.toBeVisible()
 })
+
+test('mobile 375px — CTA "Agendar diagnóstico" visible sin scroll (#202)', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 })
+  await page.goto('/?utm_source=google&utm_medium=cpc')
+
+  // Header CTA activo en mobile
+  await expect(page.getByRole('button', { name: /agendar diagnóstico/i })).toBeVisible({ timeout: 15_000 })
+})
