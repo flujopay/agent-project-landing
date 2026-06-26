@@ -1,0 +1,179 @@
+# Quick Start — agent-project-landing
+
+Guía corta para trabajar en este repo con Claude Code. Pegado aquí para que **no tengas que ir al repo de `workspace-template`** a leerla.
+
+> **Repo:** `flujopay/agent-project-landing`
+> **Stack:** Next.js / React
+> **Puerto local:** N/A
+
+---
+
+## TL;DR — Flujo de un cambio típico
+
+```
+/init  →  /plan  →  /apply  →  /build  →  (review+merge)
+                       ↑          ↓
+                       └─ tests ──┘
+```
+
+1. **`/init`** al arrancar la sesión → te pone en `dev`, lista work-items en curso, detecta drift.
+2. **`/plan`** describes lo que quieres hacer en lenguaje natural → Claude propone un work-item + tasks (sub-issues nativos), pide confirmación, los crea en GitHub y los engancha al Project.
+3. **`/apply`** implementa la task activa, corre los tests.
+4. **`/build`** commitea (con confirmación), pushea, y al cerrar la última task ofrece abrir **un solo PR** del work-item completo hacia `dev`.
+5. Tras el merge, **`/init`** o **`/build`** cierran automáticamente el work-item, las tasks colgantes y los labels.
+
+---
+
+## Ejemplo paso a paso
+
+> **Escenario:** agregar un endpoint `GET /users` con paginación.
+
+### `/init`
+
+**Claude:** Encontré 3 issues abiertos: `#8 fix login`, `#9 add pagination`, `#11 refactor auth`. ¿Trabajamos sobre alguno o tienes algo nuevo?
+
+**User:** Tengo algo nuevo.
+
+### `/plan`
+
+**User:** Quiero un endpoint `GET /users` con paginación.
+
+**Claude:** Voy a crear en GitHub:
+- Work-item padre: `feat: paginated users endpoint`
+- Sub-issue #1: Crear ruta `GET /users?page&limit`
+- Sub-issue #2: Query con offset a la DB
+- Sub-issue #3: Respuesta `{ data, total, page }`
+
+¿Creo estos issues?
+
+**User:** Sí.
+
+*Crea work-item #15 + sub-issues #16, #17, #18 vinculados nativamente.*
+
+### `/apply`
+
+**Claude:** ¿Aplico el plan? Cada sub-issue será un commit.
+
+**User:** Sí.
+
+```
+#16 → feat: add GET /users route
+#17 → feat: db query with pagination
+#18 → feat: paginated response format
+```
+
+### `/build`
+
+**Claude:** ✓ Tests pasando. ¿Abro el PR hacia `dev`?
+
+**User:** Sí.
+
+*Crea PR #19, closes #15 #16 #17 #18.*
+
+**Claude:** PR listo → [#19](../../pull/19). ¿Cómo cerrar el PR?
+
+```
+1. Dejar para review del equipo  (default)
+2. Mergearlo yo mismo ahora      (solo-dev)
+3. Auto-merge cuando pasen checks
+4. Asignar reviewer específico
+```
+
+**User:** 1.
+
+> Tras el merge en GitHub, la próxima `/init` cierra el work-item + tasks + ofrece borrar la rama. **Nada queda `in-progress` si el work-item está completo.**
+
+### Pase a producción
+
+**`/deploy`** detecta primero si producción ya existe:
+
+- **Ya existe + sana** → reporta `✓ Producción saludable` y sale. **No regenera archivos en uso.**
+- **Configs presentes pero sin CI/CD** → ofrece migrar a deploy automático.
+- **Nada detectado** → setup completo: Dockerfile + workflow + `.env.example` + lista de secrets faltantes.
+
+---
+
+## Comandos disponibles
+
+### Flujo principal
+
+| Comando | Cuándo usarlo | Qué hace |
+|---|---|---|
+| `/init` | Al arrancar sesión | Lee issues/PRs/work-items, posiciona en `dev`, detecta drift, limpia estados zombies |
+| `/plan` | Para planificar trabajo nuevo | Crea work-item padre + tasks vinculadas como sub-issues nativos. Pide confirmación antes de crear nada |
+| `/apply` | Implementar la task activa | Lee plan, escribe código, corre tests. Una task a la vez |
+| `/test` | Correr tests aislados | Ejecuta el suite del repo según el stack |
+| `/build` | Cerrar una task | Commit (confirma) + push (confirma) + cierra issue. Al cerrar la última task del work-item, ofrece el PR único |
+| `/review` | Code review del PR | Checklist completo: bloqueantes, mejoras, nits |
+
+### Soporte
+
+| Comando | Cuándo usarlo |
+|---|---|
+| `/debug` | Cuando `/apply` o `/test` fallan repetidamente |
+| `/sync` | Cuando hay drift entre código y GitHub (issues, tasks, PRs) |
+| `/triage` | Limpieza periódica de issues / cierre en bulk de tasks cubiertas |
+| `/branches` | Setup inicial de las 3 ramas protegidas (`main`, `staging`, `dev`) |
+| `/cross` | Cambios que afectan múltiples repos en un workspace |
+| `/design` | Trabajo de UI/UX, prototipado |
+
+### Seguridad
+
+| Comando | Alcance | Cuándo |
+|---|---|---|
+| `/secure` | **Próximo deploy** (rápido, bloqueante) | Antes de cada deploy a prod |
+| `/audit` | **PR actual** (profundo, OWASP Top 10) | Antes de mergear cambios sensibles (auth, pagos, uploads) |
+| `/pentest` | **Todo el proyecto** (exhaustivo, periódico) | Mensual sobre `main`. Crea work-item padre + sub-issues nativos por hallazgo |
+
+### Producción
+
+| Comando | Cuándo |
+|---|---|
+| `/deploy` | Configurar CI/CD o verificar estado de producción. **Detecta si ya está enlazado a un proveedor y no reconfigura si todo está sano.** |
+| `/rollback` | Cuando un deploy rompe producción |
+
+---
+
+## Reglas operativas clave
+
+1. **Toda planificación se agrupa bajo un work-item padre.** No hay tasks huérfanas.
+2. **Un work-item = una rama = un PR final.** Cada task cerrada se commitea en la misma rama.
+3. **Confirmación obligatoria** antes de: crear issues, crear la rama, hacer commit, push, abrir PR, mergear.
+4. **El PR se abre solo cuando todas las tasks del work-item están cerradas.**
+5. **Drift detection** automático contra `dev` antes de tocar código y antes de abrir el PR.
+6. **`/deploy` no reconfigura producción si ya existe y está sana.** Detecta `vercel.json`, `.vercel/project.json`, `fly.toml`, workflows activos, etc.
+7. **Tras el merge, `/build` cierra el work-item, las tasks colgantes y los labels en automático** (sin confirmación: el merge ya fue la decisión). Solo el borrado de rama se confirma.
+
+---
+
+## Convenciones de commits
+
+```
+feat(scope): descripción de la task (#task-N) — feature #parent-N
+fix(scope): ...
+refactor(scope): ...
+chore(scope): ...
+```
+
+Tipos válidos: `feat`, `fix`, `hotfix`, `refactor`, `docs`, `test`, `chore`, `perf`, `ci`, `build`, `style`, `revert`.
+
+## Convenciones de ramas
+
+| Tipo de work-item | Prefijo de rama |
+|---|---|
+| feature | `feature/<N>-<slug>` |
+| refactor | `refactor/<N>-<slug>` |
+| fix | `fix/<N>-<slug>` |
+| chore | `chore/<N>-<slug>` |
+| hotfix urgente | `hotfix/<N>-<slug>` (desde `main`) |
+
+---
+
+## Más detalle
+
+- Convenciones específicas del repo: `CLAUDE.md`
+- Reglas de stack: `.claude/rules/`
+- Skills completos: `.claude/skills/<name>/SKILL.md`
+- Templates de issues/PR: `.github/ISSUE_TEMPLATE/` y `.github/pull_request_template.md`
+
+> Este archivo se regenera automáticamente con `npx workspace-template update`.
