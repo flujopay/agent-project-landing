@@ -44,3 +44,6 @@ next-env.d.ts
 playwright-report/
 test-results/
 .playwright-cache/
+
+# Claude Code credentials (generado por workspace-template)
+.claude-credentials

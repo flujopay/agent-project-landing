@@ -1,43 +1,112 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guía para Claude Code en este repositorio.
 
-## Commands
+## Qué es agent-project-landing
 
+Landing
+
+**Repo:** `flujopay/agent-project-landing`
+**Stack:** Next.js / React
+**Puerto local:** N/A
+
+## Stack y dependencias
+
+Ver `package.json` / `pyproject.toml` / equivalente para la lista completa.
+
+**Para levantar localmente:**
 ```bash
-yarn dev      # Start development server (localhost:3000)
-yarn build    # Production build (standalone output)
-yarn start    # Run production server
-yarn lint     # Run ESLint
+# Instalar dependencias
+npm install   # o: pip install -r requirements.txt / poetry install
+
+# Levantar servidor de desarrollo
+npm run dev   # o el comando equivalente del stack
 ```
 
-## Architecture
+## Convenciones
 
-This is a Next.js 16 landing page for "Recupera" (B2B debt collection CRM), using the App Router with React 19.
+### Commits
 
-### Directory Structure
+Formato conventional commits:
 
-- `src/app/` - Next.js App Router pages and layouts
-- `src/ui/` - React components organized by page/feature
-  - `ui/recupera/sections/` - Landing page sections (Hero, FAQ, ContactForm, etc.)
-  - `ui/shared/` - Reusable components (Button, Input, Modal, Toast, WhatsApp widget)
-  - `ui/layout/` - Header and Footer
-- `src/lib/` - Business logic and utilities
-  - `lib/store/` - Zustand stores (modalStore, useCurrencyStore, useToastStore)
-  - `lib/services/` - API services with TanStack Query mutations
-  - `lib/data/constants.ts` - Site configuration (social links, footer nav, contact info)
-- `src/api/` - Axios instances for API calls (base URL: services.flujolink.com)
+```
+feat(scope): descripción #N
+fix(scope): descripción #N
+hotfix(scope): descripción #N
+refactor(scope): descripción #N
+docs(scope): descripción #N
+chore(scope): descripción #N
+```
 
-### Key Patterns
+Types válidos: `feat`, `fix`, `hotfix`, `refactor`, `docs`, `test`, `chore`, `perf`, `ci`, `build`, `style`, `revert`. Header máximo 100 chars.
 
-**State Management**: Zustand for global state (modals, toasts, currency). TanStack Query for server state.
+### Branching
 
-**Server Components**: Layout fetches IP/country data server-side via `getIpInfoServer()` and `getCountriesServer()`, passed to client via Providers.
+Modelo **3 branches protegidas**:
 
-**Styling**: Tailwind CSS 4 with custom theme variables in `globals.css`:
-- Brand colors: `brand-primary` (blue #3771d1), `brand-secondary` (orange #f6793a)
-- Custom fonts: `font-canaro`, `font-adobe`, `font-caslon`
+| Branch | Rol |
+|---|---|
+| `main` | Producción. Solo recibe merges desde `staging` y hotfixes. |
+| `staging` | Pre-producción / QA. Recibe merges desde `dev`. |
+| `dev` | Integración. Default para features y fixes. |
+| `feat/*`, `fix/*`, `hotfix/*` | Ramas de trabajo efímeras. |
 
-**SVG Imports**: Uses @svgr/webpack via Turbopack to import SVGs as React components.
+**Flujo estándar:**
+1. Crea branch desde `dev`: `git checkout -b feat/issue-{N}-descripcion`
+2. Commits conventional referenciando issue: `feat(scope): descripción #N`
+3. Abre PR contra `dev`. Body incluye `Closes #N`.
+4. Squash merge → `dev`.
 
-**Forms**: react-hook-form for form handling, submitted to `/api/v1/users/send_contact_info/`.
+### Tests
+
+- Cada feature requiere: happy path + validation errors + auth errors.
+- No escribir tests vacíos sin asserts.
+- Correr el test con el código roto para confirmar que falla primero.
+
+## Context policy
+
+Todo contexto de proyecto vive en GitHub.
+
+| Contexto | Dónde |
+|---|---|
+| Estado de una feature | Issue de GitHub (comments) |
+| Plan de un work-item | Body del issue padre + sub-issues (tasks) |
+| Progreso de sesión | Comment en el issue activo |
+| Push mode del work-item | Comment del issue padre con tag `<!-- push-mode: on-pr/per-task/manual -->` |
+| Convenciones | Este `CLAUDE.md` + `.claude/rules/` |
+| Preferencias personales | `CLAUDE.local.md` (no commitear) |
+
+## Personalización del workspace
+
+Modelo **"workspace files inviolables"**: skills/rules/scripts del template se sobrescriben en cada `update`. Para personalizar, **copia el archivo con otro nombre** en lugar de editar el original. Skills/rules/MCPs propios del proyecto (no del template) se preservan intactos.
+
+## Flujo estándar de trabajo
+
+```
+Desarrollo:
+  /init → /plan → /apply → /test → /build → /review
+
+Deploy:
+  /secure → /deploy
+
+Soporte:
+  /debug    — cuando /apply o /test fallan
+  /audit    — revisión OWASP profunda antes de mergear cambios sensibles
+  /pentest  — barrida completa de seguridad sobre todo el proyecto (periódico)
+  /sync     — cuando hay drift entre código y GitHub
+  /rollback — cuando un deploy rompe producción
+  /design   — cuando hay trabajo de UI/UX
+  /triage   — limpieza periódica de issues
+```
+
+**Reglas operativas para Claude:**
+
+1. Al arrancar sesión: `/init`
+2. Al cerrar sesión: `/build`
+3. Antes de cada deploy: `/secure` es obligatorio.
+4. Si el plan en GitHub no refleja el código: correr `/sync`.
+5. Aprendizajes que deben persistir: commitear al `CLAUDE.md`.
+6. **`no-edit-without-plan` (regla dura, enforced por hook).** Un hook `PreToolUse` (`.claude/scripts/no-edit-without-plan.sh`) bloquea Edit/Write/Bash-con-redirección cuando la rama actual es `dev`/`main`/`staging` o no tiene prefijo de work-item (`feature/*`, `fix/*`, `refactor/*`, `chore/*`, `hotfix/*`). El bloqueo es técnico, no convencional. Whitelist: `.claude/`, `CLAUDE.local.md`, `.gitignore`. Bypass de emergencia: `CLAUDE_ALLOW_DIRECT_EDIT=1`. Flujo correcto: `/plan` → `/apply` (crea rama) → editar.
+7. **Granularidad invariante:** una invocación de `/apply` = una task (STOP al terminar). Una invocación de `/build` = una task = un commit (si el diff abarca varias tasks, `/build` lo detecta y obliga a partir).
+8. **`/plan` crea N work-items de una vez** cuando el alcance abarca trabajos independientes. La rama la crea `/apply` al arrancar cada work-item, no `/plan`.
+9. **Ownership multi-dev:** `/apply` valida `assignees` y label `in-progress` antes de tomar un work-item. Si otro dev ya lo tomó, no se toca.
