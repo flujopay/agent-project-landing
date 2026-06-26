@@ -27,8 +27,8 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#2270D0] text-white py-12 md:py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <footer className="bg-footer-bg text-white py-12 md:py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1280px] mx-auto">
         <div className="flex justify-start mb-10 md:mb-8 md:ml-[-50px] ml-[-32px]">
           <img
             src={AssetImage.logoBlanco.src}
@@ -66,7 +66,7 @@ export const Footer = () => {
             href={SOCIAL_LINKS.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[#f6793a] transition-colors duration-200"
+            className="hover:text-brand-secondary transition-colors duration-200"
             aria-label="Facebook"
           >
             <AssetIcon.facebook width={22} height={22} />
@@ -75,7 +75,7 @@ export const Footer = () => {
             href={SOCIAL_LINKS.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-blue-500 transition-colors duration-200"
+            className="hover:text-brand-secondary transition-colors duration-200"
             aria-label="Instagram"
           >
             <AssetIcon.instagram width={22} height={22} />
@@ -84,7 +84,7 @@ export const Footer = () => {
             href={SOCIAL_LINKS.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-blue-500 transition-colors duration-200"
+            className="hover:text-brand-secondary transition-colors duration-200"
             aria-label="LinkedIn"
           >
             <AssetIcon.linkedin width={22} height={22} />
@@ -93,7 +93,7 @@ export const Footer = () => {
             href={SOCIAL_LINKS.youtube}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-blue-500 transition-colors duration-200"
+            className="hover:text-brand-secondary transition-colors duration-200"
             aria-label="YouTube"
           >
             <AssetIcon.youtube width={22} height={22} />
@@ -110,7 +110,7 @@ export const Footer = () => {
               <li>
                 <a
                   href={`mailto:${CONTACT_INFO.email}`}
-                  className="hover:text-blue-300 transition-colors duration-200"
+                  className="hover:text-white/80 transition-colors duration-200"
                 >
                   {CONTACT_INFO.email}
                 </a>
@@ -118,7 +118,7 @@ export const Footer = () => {
               <li>
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
-                  className="hover:text-blue-300 transition-colors duration-200"
+                  className="hover:text-white/80 transition-colors duration-200"
                 >
                   {CONTACT_INFO.phone}
                 </a>
@@ -138,7 +138,7 @@ export const Footer = () => {
                     onClick={() =>
                       !item.disabled && handleNavClick(item.type, item.href)
                     }
-                    className={`${item.disabled ? "" : "hover:text-blue-300 cursor-pointer"} transition-colors duration-200`}
+                    className={`${item.disabled ? "" : "hover:text-white/80 cursor-pointer"} transition-colors duration-200`}
                   >
                     {item.label}
                   </button>
@@ -159,7 +159,7 @@ export const Footer = () => {
                     onClick={() =>
                       !item.disabled && handleNavClick(item.type, item.href)
                     }
-                    className={`${item.disabled ? "" : "hover:text-blue-300 cursor-pointer"} transition-colors duration-200`}
+                    className={`${item.disabled ? "" : "hover:text-white/80 cursor-pointer"} transition-colors duration-200`}
                   >
                     {item.label}
                   </button>
@@ -178,7 +178,7 @@ export const Footer = () => {
                     onClick={() =>
                       !item.disabled && handleNavClick(item.type, item.href)
                     }
-                    className={`${item.disabled ? "" : "hover:text-blue-300 cursor-pointer"} transition-colors duration-200`}
+                    className={`${item.disabled ? "" : "hover:text-white/80 cursor-pointer"} transition-colors duration-200`}
                   >
                     {item.label}
                   </button>
@@ -210,7 +210,7 @@ export const Footer = () => {
                     onClick={() =>
                       !item.disabled && handleNavClick(item.type, item.href)
                     }
-                    className={`${item.disabled ? "" : "hover:text-blue-500 cursor-pointer"} transition-colors duration-200`}
+                    className={`${item.disabled ? "" : "hover:text-brand-secondary cursor-pointer"} transition-colors duration-200`}
                   >
                     {item.label}
                   </button>
@@ -231,7 +231,7 @@ export const Footer = () => {
                     onClick={() =>
                       !item.disabled && handleNavClick(item.type, item.href)
                     }
-                    className={`${item.disabled ? "" : "hover:text-blue-500 cursor-pointer"} transition-colors duration-200`}
+                    className={`${item.disabled ? "" : "hover:text-brand-secondary cursor-pointer"} transition-colors duration-200`}
                   >
                     {item.label}
                   </button>
@@ -248,7 +248,7 @@ export const Footer = () => {
               <li>
                 <a
                   href={`mailto:${CONTACT_INFO.email}`}
-                  className="hover:text-blue-500 transition-colors duration-200 break-all"
+                  className="hover:text-brand-secondary transition-colors duration-200 break-all"
                 >
                   {CONTACT_INFO.email}
                 </a>
@@ -256,7 +256,7 @@ export const Footer = () => {
               <li>
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
-                  className="hover:text-blue-500 transition-colors duration-200"
+                  className="hover:text-brand-secondary transition-colors duration-200"
                 >
                   {CONTACT_INFO.phone}
                 </a>
@@ -276,7 +276,7 @@ export const Footer = () => {
                     onClick={() =>
                       !item.disabled && handleNavClick(item.type, item.href)
                     }
-                    className={`${item.disabled ? "" : "hover:text-blue-500 cursor-pointer"} transition-colors duration-200`}
+                    className={`${item.disabled ? "" : "hover:text-brand-secondary cursor-pointer"} transition-colors duration-200`}
                   >
                     {item.label}
                   </button>
@@ -318,7 +318,7 @@ export const Footer = () => {
               href={SOCIAL_LINKS.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#f6793a] transition-colors duration-200"
+              className="hover:text-brand-secondary transition-colors duration-200"
               aria-label="Facebook"
             >
               <AssetIcon.facebook width={22} height={22} />
@@ -327,7 +327,7 @@ export const Footer = () => {
               href={SOCIAL_LINKS.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-blue-500 transition-colors duration-200"
+              className="hover:text-brand-secondary transition-colors duration-200"
               aria-label="Instagram"
             >
               <AssetIcon.instagram width={22} height={22} />
@@ -336,7 +336,7 @@ export const Footer = () => {
               href={SOCIAL_LINKS.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-blue-500 transition-colors duration-200"
+              className="hover:text-brand-secondary transition-colors duration-200"
               aria-label="LinkedIn"
             >
               <AssetIcon.linkedin width={22} height={22} />
@@ -345,7 +345,7 @@ export const Footer = () => {
               href={SOCIAL_LINKS.youtube}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-blue-500 transition-colors duration-200"
+              className="hover:text-brand-secondary transition-colors duration-200"
               aria-label="YouTube"
             >
               <AssetIcon.youtube width={22} height={22} />

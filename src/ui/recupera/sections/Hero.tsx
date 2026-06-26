@@ -90,7 +90,7 @@ const AgentFeed = () => {
                   <span className="w-1 h-1 rounded-full bg-brand-primary/40 animate-bounce" style={{ animationDelay: "150ms" }} />
                   <span className="w-1 h-1 rounded-full bg-brand-primary/40 animate-bounce" style={{ animationDelay: "300ms" }} />
                 </div>
-                <span className="text-[10px] text-slate-400 italic">
+                <span className="text-[10px] text-text-secondary italic">
                   {item.processing}
                 </span>
               </motion.div>
@@ -114,9 +114,9 @@ const AgentFeed = () => {
                   <div className="text-[11px] font-semibold text-brand-primary-dark leading-tight">
                     {item.label}
                   </div>
-                  <div className="text-[9px] text-slate-400">{item.sub}</div>
+                  <div className="text-[9px] text-text-secondary">{item.sub}</div>
                 </div>
-                <span className="text-[9px] text-slate-400 shrink-0">
+                <span className="text-[9px] text-text-secondary shrink-0">
                   {item.time}
                 </span>
               </motion.div>
@@ -161,7 +161,7 @@ export const Hero = () => {
   };
 
   return (
-    <div className="relative bg-white overflow-hidden">
+    <div className="relative bg-surface-secondary overflow-hidden">
       {/* Hero: 2 columns */}
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-72px)]">
         {/* Left: Text */}
@@ -180,17 +180,17 @@ export const Hero = () => {
           </div>
 
           {/* Headline */}
-          <h1 className="font-canaro text-brand-primary-dark text-4xl md:text-5xl lg:text-[3.2rem] xl:text-6xl font-extrabold leading-[1.05] tracking-tight mb-6">
+          <h1 className="font-canaro text-brand-primary-dark text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold leading-[1.05] tracking-tight mb-6">
             Cobrar es nuestro trabajo
-            <span className="text-brand-secondary font-serif">.</span>
+            <span className="text-brand-secondary font-caslon">.</span>
             <br />
             <span className="text-brand-primary">
-              Crecer es el tuyo<span className="text-brand-secondary font-serif">.</span>
+              Crecer es el tuyo<span className="text-brand-secondary font-caslon">.</span>
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-slate-500 text-base md:text-lg leading-relaxed mb-10 max-w-md border-l-2 border-slate-200 pl-4">
+          <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-10 max-w-md border-l-2 border-border-default pl-4">
             Sena es tu equipo externo de cobranza. Combinamos{" "}
             <strong className="text-brand-primary-dark">
               tecnología, agentes de IA y especialistas humanos
@@ -210,7 +210,7 @@ export const Hero = () => {
             />
             <button
               onClick={scrollToComoTrabajamos}
-              className="inline-flex items-center gap-2 px-4 py-3 text-slate-500 font-medium text-sm hover:text-brand-primary-dark transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-3 text-text-secondary font-medium text-sm hover:text-brand-primary-dark transition-colors"
             >
               Cómo funciona
               <ArrowRight className="h-4 w-4" />
@@ -218,12 +218,12 @@ export const Hero = () => {
           </div>
 
           {/* Proof bar */}
-          <div className="flex rounded-xl border border-slate-200 overflow-hidden divide-x divide-slate-200">
+          <div className="flex rounded-xl border border-border-default overflow-hidden divide-x divide-border-default">
             <div className="flex-1 py-4 px-5">
               <div className="font-canaro font-extrabold text-xl text-brand-primary-dark leading-none">
                 146M
               </div>
-              <div className="text-[11px] text-slate-400 mt-1">
+              <div className="text-[11px] text-text-secondary mt-1">
                 gestiones / mes
               </div>
             </div>
@@ -231,7 +231,7 @@ export const Hero = () => {
               <div className="font-canaro font-extrabold text-xl text-brand-primary-dark leading-none">
                 40+
               </div>
-              <div className="text-[11px] text-slate-400 mt-1">
+              <div className="text-[11px] text-text-secondary mt-1">
                 años de experiencia
               </div>
             </div>
@@ -239,7 +239,7 @@ export const Hero = () => {
               <div className="font-canaro font-extrabold text-xl text-brand-primary-dark leading-none">
                 15
               </div>
-              <div className="text-[11px] text-slate-400 mt-1">
+              <div className="text-[11px] text-text-secondary mt-1">
                 países en LATAM
               </div>
             </div>
@@ -258,7 +258,7 @@ export const Hero = () => {
             <div className="flex items-center justify-between px-3.5 h-9 bg-brand-primary-dark">
               <div className="flex items-center gap-3">
                 <span className="font-canaro font-extrabold text-[13px] text-white">
-                  Sena<span className="text-brand-secondary font-serif">.</span>
+                  Sena<span className="text-brand-secondary font-caslon">.</span>
                 </span>
                 <div className="w-px h-4 bg-white/15" />
                 <div className="flex gap-0.5">
@@ -288,7 +288,7 @@ export const Hero = () => {
             <div className="flex h-[340px]">
               {/* Sidebar */}
               <div className="w-[120px] shrink-0 border-r border-slate-100 bg-slate-50/80 py-3 hidden xl:block">
-                <div className="text-[8px] font-bold uppercase tracking-wider text-slate-400/50 px-3 mb-1.5">
+                <div className="text-[8px] font-bold uppercase tracking-wider text-text-secondary/50 px-3 mb-1.5">
                   Resumen
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold text-brand-primary-dark bg-white border-l-2 border-brand-primary">
@@ -300,25 +300,25 @@ export const Hero = () => {
                   </svg>
                   Dashboard
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] text-slate-400 font-medium">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] text-text-secondary font-medium">
                   Facturas
                   <span className="ml-auto text-[9px] font-bold bg-brand-primary/10 text-brand-primary px-1.5 py-0.5 rounded-full">
                     47
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] text-slate-400 font-medium">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] text-text-secondary font-medium">
                   Clientes
                 </div>
-                <div className="text-[8px] font-bold uppercase tracking-wider text-slate-400/50 px-3 mt-3 mb-1.5">
+                <div className="text-[8px] font-bold uppercase tracking-wider text-text-secondary/50 px-3 mt-3 mb-1.5">
                   Agente
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] text-slate-400 font-medium">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] text-text-secondary font-medium">
                   Actividad
                   <span className="ml-auto text-[9px] font-bold bg-brand-secondary/10 text-brand-secondary px-1.5 py-0.5 rounded-full">
                     3
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] text-slate-400 font-medium">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] text-text-secondary font-medium">
                   Historial
                 </div>
               </div>
@@ -328,7 +328,7 @@ export const Hero = () => {
                 {/* KPI Strip */}
                 <div className="grid grid-cols-4 border-b border-slate-100">
                   <div className="p-3 border-r border-slate-100">
-                    <div className="text-[9px] text-slate-400 font-medium uppercase tracking-wide mb-1">
+                    <div className="text-[9px] text-text-secondary font-medium uppercase tracking-wide mb-1">
                       Cartera total
                     </div>
                     <div className="font-canaro font-extrabold text-[15px] text-brand-primary-dark leading-none">
@@ -339,7 +339,7 @@ export const Hero = () => {
                     </div>
                   </div>
                   <div className="p-3 border-r border-slate-100">
-                    <div className="text-[9px] text-slate-400 font-medium uppercase tracking-wide mb-1">
+                    <div className="text-[9px] text-text-secondary font-medium uppercase tracking-wide mb-1">
                       Recuperado
                     </div>
                     <div className="font-canaro font-extrabold text-[15px] text-green-600 leading-none">
@@ -350,7 +350,7 @@ export const Hero = () => {
                     </div>
                   </div>
                   <div className="p-3 border-r border-slate-100">
-                    <div className="text-[9px] text-slate-400 font-medium uppercase tracking-wide mb-1">
+                    <div className="text-[9px] text-text-secondary font-medium uppercase tracking-wide mb-1">
                       DSO promedio
                     </div>
                     <div className="font-canaro font-extrabold text-[15px] text-brand-primary-dark leading-none">
@@ -361,13 +361,13 @@ export const Hero = () => {
                     </div>
                   </div>
                   <div className="p-3 bg-brand-secondary/[0.03]">
-                    <div className="text-[9px] text-slate-400 font-medium uppercase tracking-wide mb-1">
+                    <div className="text-[9px] text-text-secondary font-medium uppercase tracking-wide mb-1">
                       Requieren acción
                     </div>
                     <div className="font-canaro font-extrabold text-[15px] text-brand-secondary leading-none">
                       3
                     </div>
-                    <div className="text-[9px] text-slate-400 font-medium mt-1">
+                    <div className="text-[9px] text-text-secondary font-medium mt-1">
                       Esperan tu criterio
                     </div>
                   </div>
@@ -381,7 +381,7 @@ export const Hero = () => {
                       <span className="text-[10px] font-bold text-brand-primary-dark uppercase tracking-wide">
                         Aging de cartera
                       </span>
-                      <span className="text-[9px] text-slate-400">
+                      <span className="text-[9px] text-text-secondary">
                         47 facturas
                       </span>
                     </div>
@@ -389,7 +389,7 @@ export const Hero = () => {
                       {/* 0-30 */}
                       <div className="flex items-center gap-2">
                         <div className="w-[65px] shrink-0">
-                          <div className="text-[9px] text-slate-400">
+                          <div className="text-[9px] text-text-secondary">
                             0–30 días
                           </div>
                           <div className="text-[10px] font-semibold text-brand-primary-dark">
@@ -412,7 +412,7 @@ export const Hero = () => {
                       {/* 31-60 */}
                       <div className="flex items-center gap-2">
                         <div className="w-[65px] shrink-0">
-                          <div className="text-[9px] text-slate-400">
+                          <div className="text-[9px] text-text-secondary">
                             31–60 días
                           </div>
                           <div className="text-[10px] font-semibold text-brand-primary-dark">
@@ -435,7 +435,7 @@ export const Hero = () => {
                       {/* +60 */}
                       <div className="flex items-center gap-2">
                         <div className="w-[65px] shrink-0">
-                          <div className="text-[9px] text-slate-400">
+                          <div className="text-[9px] text-text-secondary">
                             +60 días
                           </div>
                           <div className="text-[10px] font-semibold text-brand-primary-dark">

@@ -34,7 +34,7 @@ export const Input = ({
         {required && <span className="text-red-500">*</span>}
       </label>
       <div
-        className={`relative flex items-center w-full rounded-full border bg-white  ${error ? "border-red-500" : "border-[#ddd]"}`}
+        className={`relative flex items-center w-full rounded-full border bg-white  ${error ? "border-red-500" : "border-border-default"}`}
       >
         {leftElement && <div className="shrink-0">{leftElement}</div>}
         <input

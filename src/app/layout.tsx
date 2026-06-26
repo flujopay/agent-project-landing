@@ -150,7 +150,7 @@ export default async function RootLayout({
           </noscript>
         </head>
         <body
-          className={`${canaroFont.variable} ${adobeCleanFont.variable} ${caslonFont.variable} antialiased font-adobe`}
+          className={`${canaroFont.variable} ${adobeCleanFont.variable} ${caslonFont.variable} antialiased font-adobe bg-surface-default`}
         >
           {/* Deshabilitar debugger statements */}
           <Script id="disable-debugger" strategy="beforeInteractive">
