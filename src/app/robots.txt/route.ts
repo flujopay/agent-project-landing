@@ -5,8 +5,8 @@ export async function GET() {
 User-agent: *
 Allow: /
 
-Sitemap: https://opera.somossena.com/sitemap.xml
-LLMs: https://opera.somossena.com/llms.txt
+Sitemap: https://agente.somossena.com/sitemap.xml
+LLMs: https://agente.somossena.com/llms.txt
   `.trim();
 
   return new NextResponse(content, {
