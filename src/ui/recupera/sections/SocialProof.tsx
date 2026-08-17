@@ -4,13 +4,14 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const clientLogos = [
-  // Asset local a propósito: los que hotlinkean abajo apuntan al build de sena-landing (ver #25).
+  // Assets locales.
   { name: "L'Oréal", src: "/images/loreal_logo.png" },
+  { name: "Recsa", src: "/images/recsa_logo.png" },
+  // Hotlinkean al build de sena-landing a propósito (ver #25).
   { name: "Científica Andina", src: "https://somossena.com/_next/static/media/cientifica_logo.1b3f19e5.png" },
   { name: "Top Space", src: "https://somossena.com/_next/static/media/top_space_logo.145e55c9.png" },
   { name: "Maruz", src: "https://somossena.com/_next/static/media/maruz_logo.b330e9ab.png" },
   { name: "AOM", src: "https://somossena.com/_next/static/media/aom_logo.699160f3.png" },
-  { name: "Recsa", src: "/images/recsa_logo.png" },
 ];
 
 // Duplicate for infinite scroll effect
