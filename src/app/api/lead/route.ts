@@ -96,7 +96,7 @@ async function sendMetaCapi(body: LeadPayload): Promise<void> {
   if (body.fbclid) userData.fbc = `fb.1.${Date.now()}.${body.fbclid}`;
 
   try {
-    await fetch(`https://graph.facebook.com/v21.0/${pixelId}/events`, {
+    const res = await fetch(`https://graph.facebook.com/v21.0/${pixelId}/events`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -115,8 +115,9 @@ async function sendMetaCapi(body: LeadPayload): Promise<void> {
           },
         ],
       }),
-      signal: AbortSignal.timeout(5000),
+      signal: AbortSignal.timeout(2000),
     });
+    if (!res.ok) console.error(`[CAPI] Meta respondió status=${res.status}`);
   } catch (err) {
     console.error("[CAPI] error:", err instanceof Error ? err.message : "CAPI error");
   }

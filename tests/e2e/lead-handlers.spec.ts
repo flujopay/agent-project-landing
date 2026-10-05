@@ -3,20 +3,22 @@ import { test, expect } from '@playwright/test'
 
 import { POST as postLead } from '@/app/api/lead/route'
 
-type Call = { method: string; url: string; body: unknown }
+type Call = { method: string; url: string; body: unknown; signal?: AbortSignal | null }
 
 // Valores válidos del enum fuente_del_lead en HubSpot. Cualquier otro devuelve 400.
 const FUENTES_VALIDAS = ['Ads', 'Orgánico', 'Referido', 'Outbound/Piloto BBDD', 'MetaRecsa']
 
 // Simula HubSpot (y Meta). `contactPost` define las respuestas sucesivas al crear el contacto.
-function mockHubspot(opts: { contactPost?: { status: number; json: unknown }[] } = {}) {
+function mockHubspot(
+  opts: { contactPost?: { status: number; json: unknown }[]; capiStatus?: number; assocStatus?: number } = {}
+) {
   const calls: Call[] = []
   let contactPosts = 0
   const original = globalThis.fetch
   globalThis.fetch = (async (url: string, init: RequestInit = {}) => {
     const method = init.method ?? 'GET'
     const body = init.body ? JSON.parse(String(init.body)) : undefined
-    calls.push({ method, url, body })
+    calls.push({ method, url, body, signal: init.signal })
     const json = (status: number, data: unknown) =>
       new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } })
     if (url.includes('/contacts/search')) return json(200, { total: 0, results: [] })
@@ -25,6 +27,8 @@ function mockHubspot(opts: { contactPost?: { status: number; json: unknown }[] }
       return json(r.status, r.json)
     }
     if (url.endsWith('/crm/v3/objects/deals')) return json(201, { id: '88' })
+    if (url.includes('/associations/contacts/')) return json(opts.assocStatus ?? 200, {})
+    if (url.includes('graph.facebook.com')) return json(opts.capiStatus ?? 200, {})
     return json(200, {})
   }) as typeof fetch
   return { calls, restore: () => (globalThis.fetch = original) }
@@ -258,6 +262,39 @@ test.describe('/api/lead: Meta CAPI solo reporta lo que el CRM guardó', () => {
       expect(res.status).toBe(502)
       expect(capiCalls(m.calls)).toHaveLength(0)
     } finally {
+      m.restore()
+    }
+  })
+
+  test('si Meta responde error registra el status sin datos personales y el lead sigue ok', async () => {
+    const m = mockHubspot({ capiStatus: 400 })
+    const logs: string[] = []
+    const original = console.error
+    console.error = (...a: unknown[]) => void logs.push(a.join(' '))
+    try {
+      const res = await postLead(req({ ...leadPayload, fbclid: 'fb1' }))
+      expect(res.status).toBe(200)
+      const salida = logs.join(' | ')
+      expect(salida).toContain('[CAPI]')
+      expect(salida).toContain('400')
+      expect(salida).not.toContain('ana@acme.cl')
+    } finally {
+      console.error = original
+      m.restore()
+    }
+  })
+
+  test('el envío a Meta usa un timeout de 2 s', async () => {
+    const m = mockHubspot()
+    const timeouts: number[] = []
+    const original = AbortSignal.timeout
+    AbortSignal.timeout = (ms: number) => (timeouts.push(ms), original.call(AbortSignal, ms))
+    try {
+      await postLead(req({ ...leadPayload, fbclid: 'fb1' }))
+      expect(timeouts).toContain(2000)
+      expect(timeouts).not.toContain(5000)
+    } finally {
+      AbortSignal.timeout = original
       m.restore()
     }
   })
