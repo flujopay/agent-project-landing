@@ -1,6 +1,7 @@
 "use client";
 
 import { TCountry } from "@/lib/types";
+import AttributionCapture from "@/ui/shared/AttributionCapture";
 import { CountriesInitializer } from "@/ui/shared/CountriesInitializer";
 import { IpConfigInitializer } from "@/ui/shared/IpConfigInitializer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -21,6 +22,7 @@ export default function Providers({
 
   return (
     <QueryClientProvider client={queryClient}>
+      <AttributionCapture />
       <IpConfigInitializer country={country || null} />
       <CountriesInitializer countries={countries} />
       {children}
