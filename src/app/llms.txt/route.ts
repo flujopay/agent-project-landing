@@ -29,12 +29,12 @@ Empresas B2B con:
 
 ## Páginas principales
 
-- [Inicio](https://opera.somossena.com): propuesta de valor y cómo funciona
-- [Contacto](https://opera.somossena.com#contacto): hablar con un especialista
+- [Inicio](https://agente.somossena.com): propuesta de valor y cómo funciona
+- [Contacto](https://agente.somossena.com#contacto): hablar con un especialista
 
 ## Contacto
 
-Web: https://opera.somossena.com
+Web: https://agente.somossena.com
 Empresa: Sena — somossena.com
 `.trim();
 

@@ -10,7 +10,6 @@ import { FAQ } from "./sections/FAQ";
 import { FinalCTA } from "./sections/FinalCTA";
 import { Hero } from "./sections/Hero";
 import { SocialProof } from "./sections/SocialProof";
-import { Testimonios } from "./sections/Testimonios";
 import { Transformacion } from "./sections/Transformacion";
 
 export const RecuperaPage = () => {
@@ -43,7 +42,6 @@ export const RecuperaPage = () => {
         <SocialProof />
         <Transformacion />
         <ComoTrabajamos />
-        <Testimonios />
         <FAQ />
         <FinalCTA />
       </div>
