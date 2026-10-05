@@ -454,7 +454,7 @@ export const Header = ({ variant }: Props) => {
         name: "Opera",
         description: "Servicio de cobranza all-in.",
         tab: "external",
-        href: "https://opera.somossena.com/",
+        href: "https://agente.somossena.com/",
       },
     ],
     [],

@@ -28,12 +28,6 @@ export const FOOTER_EMPRESA = [
     type: "external" as const,
     disabled: false,
   },
-  {
-    label: "Sobre Recsa",
-    href: "https://recsa.com/nosotros/",
-    type: "external" as const,
-    disabled: true,
-  },
   { label: "FAQs", href: "#", type: "redirect" as const, disabled: true },
 ];
 
@@ -52,7 +46,7 @@ export const FOOTER_DESCUBRIR = [
   },
   {
     label: "Opera",
-    href: "https://opera.somossena.com",
+    href: "https://agente.somossena.com",
     type: "external" as const,
     disabled: false,
   },
