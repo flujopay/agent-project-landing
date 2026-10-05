@@ -299,3 +299,31 @@ test.describe('/api/lead: Meta CAPI solo reporta lo que el CRM guardó', () => {
     }
   })
 })
+
+test.describe('/api/lead: asociación deal-contacto', () => {
+  test('si la asociación falla responde 502 sin datos personales en el log', async () => {
+    const m = mockHubspot({ assocStatus: 500 })
+    const logs: string[] = []
+    const original = console.error
+    console.error = (...a: unknown[]) => void logs.push(a.join(' '))
+    try {
+      const res = await postLead(req(leadPayload))
+      expect(res.status).toBe(502)
+      expect(logs.join(' | ')).toContain('status=500')
+      expect(logs.join(' | ')).not.toContain('ana@acme.cl')
+    } finally {
+      console.error = original
+      m.restore()
+    }
+  })
+
+  test('si la asociación funciona responde ok', async () => {
+    const m = mockHubspot()
+    try {
+      const res = await postLead(req(leadPayload))
+      expect(res.status).toBe(200)
+    } finally {
+      m.restore()
+    }
+  })
+})
