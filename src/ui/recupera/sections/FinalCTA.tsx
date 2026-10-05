@@ -1,6 +1,7 @@
 "use client";
 
 import { trackEvent, trackPixel } from "@/lib/analytics";
+import { getAttributionPayload, landingPageUrl } from "@/lib/lead/clientAttribution";
 import { useCountries } from "@/lib/services/countryService";
 import { useCurrencyStore } from "@/lib/store/useCurrencyStore";
 import { useToastStore } from "@/lib/store/useToastStore";
@@ -12,7 +13,7 @@ import SimpleCountrySelect, {
 import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -32,16 +33,7 @@ export const FinalCTA = () => {
   const { ipCurrency } = useCurrencyStore();
   const { showToast } = useToastStore();
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [countrySelect, setCountrySelect] = useState<string | null>(null);
-
-  const utmSource = searchParams?.get("utm_source") || null;
-  const utmMedium = searchParams?.get("utm_medium") || null;
-  const utmCampaign = searchParams?.get("utm_campaign") || null;
-  const utmContent = searchParams?.get("utm_content") || null;
-  const utmTerm = searchParams?.get("utm_term") || null;
-  const [gclid, setGclid] = useState<string | null>(null);
-  const [fbclid, setFbclid] = useState<string | null>(null);
 
   const countryOptions = useMemo(() => {
     if (!countries.length) return [];
@@ -81,14 +73,6 @@ export const FinalCTA = () => {
     }
   }, [ipCurrency]);
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const gc = params.get("gclid") || sessionStorage.getItem("gclid");
-    const fb = params.get("fbclid") || sessionStorage.getItem("fbclid");
-    if (gc) { setGclid(gc); sessionStorage.setItem("gclid", gc); }
-    if (fb) { setFbclid(fb); sessionStorage.setItem("fbclid", fb); }
-  }, []);
-
   const {
     control,
     handleSubmit,
@@ -125,14 +109,8 @@ export const FinalCTA = () => {
           telefono: telefonoConPrefijo,
           facturas_pendientes: data.facturas_pendientes,
           alguien_cobrando: data.alguien_cobrando,
-          utmSource: utmSource ?? undefined,
-          utmMedium: utmMedium ?? undefined,
-          utmCampaign: utmCampaign ?? undefined,
-          utmContent: utmContent ?? undefined,
-          utmTerm: utmTerm ?? undefined,
-          gclid: gclid ?? undefined,
-          fbclid: fbclid ?? undefined,
-          landingPage: window.location.pathname,
+          ...getAttributionPayload(),
+          landingPage: landingPageUrl(),
         }),
       });
 
